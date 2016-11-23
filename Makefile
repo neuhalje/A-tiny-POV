@@ -5,7 +5,7 @@
 
 DEVICE     = attiny85           # See avr-help for all possible devices
 CLOCK      = 8000000            # 8Mhz
-PROGRAMMER = -c linuxspi -P /dev/spidev0.0 # For using SPI on raspberry
+PROGRAMMER = -c linuxspi -P /dev/spidev0.0 -b 10000 # For using SPI on raspberry
 TARGET     = main
 OBJECTS    = main.o font.o output.o
 
@@ -35,7 +35,6 @@ all: $(TARGET).hex
 flash: all
 	sudo gpio -g mode 22 out
 	sudo gpio -g write 22 0
-	#sudo $(AVRDUDE) -p $(DEVICE) -P /dev/spidev0.0 -c linuxspi -b 10000 -U flash:w:$(TARGET).hex
 	sudo $(AVRDUDE) -p $(DEVICE) $(PROGRAMMER) -U flash:w:$(TARGET).hex
 	sudo gpio -g write 22 1
 
