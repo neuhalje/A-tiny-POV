@@ -1,3 +1,4 @@
+#include <stdbool.h>
 #include <stdint.h>
 #include <string.h>
 #include "custom.h"
@@ -7,7 +8,7 @@
 * Wait until the stick changes waving direction
 */
 void wait_for_reverse_waving_direction() {
-        _delay_ms(300);
+        _delay_ms(DELAY_REVERSE_WAVING_MS);
 }
 
 void write_string(const char * message, uint8_t message_len)  {

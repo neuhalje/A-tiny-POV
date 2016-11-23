@@ -5,9 +5,12 @@
 
 DEVICE     = attiny85           # See avr-help for all possible devices
 CLOCK      = 8000000            # 8Mhz
-PROGRAMMER = -c linuxspi -P usb # For using SPI on raspberry
+PROGRAMMER = -c linuxspi -P /dev/spidev0.0 # For using SPI on raspberry
 TARGET     = main
 OBJECTS    = main.o font.o output.o
+
+# Program DEFINES
+PROGRAM_DEFINES   =  -D DELAY_CHAR_COLUMN_MS=20  -DDELAY_REVERSE_WAVING_MS=300
 
 # fuse settings:
 # use http://www.engbedded.com/fusecalc
@@ -15,7 +18,7 @@ FUSES      = -U lfuse:w:0x62:m -U hfuse:w:0xdf:m -U efuse:w:0xff:m  # 1mhz
 #FUSES      = -U lfuse:w:0xe2:m -U hfuse:w:0xdf:m -U efuse:w:0xff:m  # 8mhz
 
 AVRDUDE = avrdude $(PROGRAMMER) -p $(DEVICE)
-COMPILE = avr-gcc -Wall -Os -DF_CPU=$(CLOCK) -mmcu=$(DEVICE) -std=c11
+COMPILE = avr-gcc -Wall -Os -DF_CPU=$(CLOCK) -mmcu=$(DEVICE) -std=c11 $(PROGRAM_DEFINES)
 
 # symbolic targets:
 all: $(TARGET).hex
@@ -32,7 +35,8 @@ all: $(TARGET).hex
 flash: all
 	sudo gpio -g mode 22 out
 	sudo gpio -g write 22 0
-	sudo $(AVRDUDE) -p $(AVRDUDEMCU) -P /dev/spidev0.0 -c linuxspi -b 10000 -U flash:w:$(TARGET).hex
+	#sudo $(AVRDUDE) -p $(DEVICE) -P /dev/spidev0.0 -c linuxspi -b 10000 -U flash:w:$(TARGET).hex
+	sudo $(AVRDUDE) -p $(DEVICE) $(PROGRAMMER) -U flash:w:$(TARGET).hex
 	sudo gpio -g write 22 1
 
 fuse:

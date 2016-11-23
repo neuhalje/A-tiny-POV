@@ -1,3 +1,4 @@
+#include <stdbool.h>
 #include <stdint.h>
 #include <avr/pgmspace.h>
 #include "font.h"
@@ -48,7 +49,13 @@ const FontCharacter font[CHARS_IN_FONT] PROGMEM = {
 	{ .glyph ='#', .columns =  {0xff, 0xff, 0xff, 0xff, 0xff}},
 };
 
-bool font_char_columns(const char glyph, uint8_t * dst_columns) {
+/*
+ Implementation detail: We are actually scanning the whole array.
+
+ Binary search might be faster, but we are talking about
+ lg_2(CHARS_IN_FONT) vs. CHARS_IN_FONT/2  (5 vs 16) comparisons.
+*/
+bool read_font_char_columns(const char glyph, uint8_t * dst_columns) {
    for (uint8_t glyph_index = 0; glyph_index < CHARS_IN_FONT; glyph_index++) {
       if (pgm_read_byte( & (font[glyph_index].glyph)) == glyph ) {
           memcpy_P (dst_columns, &font[glyph_index].columns[0], 8);
