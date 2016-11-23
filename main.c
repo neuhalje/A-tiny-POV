@@ -1,3 +1,5 @@
+#include <stdint.h>
+#include <string.h>
 #include "custom.h"
 #include "output.h"
 
@@ -8,13 +10,13 @@ void wait_for_reverse_waving_direction() {
         _delay_ms(300);
 }
 
-void write_string(const char * message, uint8_t message_len) 
+void write_string(const char * message, uint8_t message_len)  {
     for (uint8_t i = 0; i < message_len; i++ ) {
         output_char(message[i]);
     }
 }
 
-void write_string_reverse(const char * message, uint8_t message_len) 
+void write_string_reverse(const char * message, uint8_t message_len)  {
     for (uint8_t i = message_len - 1; i > 0; i-- ) {
         output_char_rev(message[i]);
     }
