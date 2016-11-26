@@ -1,0 +1,6 @@
+#ifndef ATPOV_DEVICE_AVR_H
+#define ATPOV_DEVICE_AVR_H
+
+// EMPTY
+
+#endif //ATPOV_DEVICE_AVR_H

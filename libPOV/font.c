@@ -1,6 +1,7 @@
+#include "device.h"
+//#include "device_avr.h"
 #include <stdbool.h>
 #include <stdint.h>
-#include <avr/pgmspace.h>
 #include "font.h"
 
 typedef struct { 
@@ -9,7 +10,7 @@ typedef struct {
 } FontCharacter;
 
 /*
- Font borrowed from http://www.instructables.com/id/10-ATtiny8545-POV-display-works-really-well/?ALLSTEPS
+ Font borrowed from http://www.instructables.com/id/10-ATtiny8545-POV-display-works-really-well/
 */
 #define CHARS_IN_FONT  33
 #define DEFAULT_GLYPH_INDEX  32
@@ -63,7 +64,7 @@ bool read_font_char_columns(const char glyph, uint8_t * dst_columns) {
       };
    }
 
-  memcpy_P (dst_columns, &font[DEFAULT_GLYPH_INDEX].columns[0], 8);
+  memcpy_P(dst_columns, &font[DEFAULT_GLYPH_INDEX].columns[0], 8);
   return false;
 }
 
