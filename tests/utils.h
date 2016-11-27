@@ -44,9 +44,8 @@
  * \param value Numeric \p value.
  * \return Hex representation of the \p value.
  */
-template <typename T>
-std::string to_hex(T value)
-{
+template<typename T>
+std::string to_hex(T value) {
     std::stringstream s;
     s << std::showbase << std::setfill('0') << std::setw(sizeof(T) * 2)
       << std::hex << static_cast<int>(value);
@@ -61,9 +60,8 @@ std::string to_hex(T value)
  * \param length Length of the array.
  * \return Hex representation of the numeric values in the array \p data.
  */
-template <typename T>
-std::string to_hex(T *data, uint16_t length)
-{
+template<typename T>
+std::string to_hex(T *data, uint16_t length) {
     std::stringstream s;
     for (uint16_t i = 0; i < length; ++i) {
         s << to_hex(data[i]) << " ";

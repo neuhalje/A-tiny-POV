@@ -14,17 +14,17 @@ target_include_directories(DeviceHeaders INTERFACE
 
 set(HEADERS
         include/device.h
-)
+        )
 
 set(SOURCES
-    main.c
-)
+        main.c
+        )
 
 set(OTHERS
-    target.dox
-)
+        target.dox
+        )
 
-if(TARGET_CONFIGURATION STREQUAL "arduino")
+if (TARGET_CONFIGURATION STREQUAL "arduino")
     add_definitions(-DF_CPU=16000000UL)
     add_definitions(-DVCC=5000U)
 
@@ -32,10 +32,10 @@ if(TARGET_CONFIGURATION STREQUAL "arduino")
 
     add_avr_executable(pov ${HEADERS} ${SOURCES} ${OTHERS})
     target_link_libraries(
-       pov-${AVR_MCU}.elf
-       libPOV-${AVR_MCU}
-       libdevice-${AVR_MCU})
-elseif(TARGET_CONFIGURATION STREQUAL "avr")
+            pov-${AVR_MCU}.elf
+            libPOV-${AVR_MCU}
+            libdevice-${AVR_MCU})
+elseif (TARGET_CONFIGURATION STREQUAL "avr")
     add_definitions(-DF_CPU=8000000UL)
     add_definitions(-DVCC=5000U)
 
@@ -43,13 +43,13 @@ elseif(TARGET_CONFIGURATION STREQUAL "avr")
 
     add_avr_executable(pov ${HEADERS} ${SOURCES} ${OTHERS})
     target_link_libraries(
-       pov-${AVR_MCU}.elf
-       libPOV-${AVR_MCU}
-       libdevice-${AVR_MCU})
-else()
+            pov-${AVR_MCU}.elf
+            libPOV-${AVR_MCU}
+            libdevice-${AVR_MCU})
+else ()
     add_subdirectory(mockavr)
 
     target_include_directories(DeviceHeaders INTERFACE
             $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/mockavr/>
             )
-endif()
+endif ()

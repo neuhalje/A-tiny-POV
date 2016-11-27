@@ -28,5 +28,5 @@
 
 
 TEST(GTestTest, ExpectoTruism) {
-    EXPECT_EQ(1, 2/2);
+    EXPECT_EQ(1, 2 / 2);
 }

@@ -3,25 +3,25 @@ set(HEADERS
         config.h
         font.h
         output.h
-)
+        )
 
 set(SOURCES
         font.c
         output.c
-)
+        )
 
 set(OTHERS
         libPOV.dox
-)
+        )
 
 
 set(LIBPOV_LIBRARY libPOV)
-if(CMAKE_CROSSCOMPILING AND CMAKE_SYSTEM_PROCESSOR STREQUAL "avr")
+if (CMAKE_CROSSCOMPILING AND CMAKE_SYSTEM_PROCESSOR STREQUAL "avr")
     add_avr_library(libPOV ${HEADERS} ${SOURCES} ${OTHERS})
     set(LIBPOV_LIBRARY libPOV-${AVR_MCU})
-else()
+else ()
     add_library(libPOV STATIC ${HEADERS} ${SOURCES} ${OTHERS})
-endif()
+endif ()
 
 
 target_include_directories(${LIBPOV_LIBRARY} INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR})
@@ -31,5 +31,3 @@ set_target_properties(${LIBPOV_LIBRARY} PROPERTIES LINKER_LANGUAGE C)
 
 # Add AVR specific header files
 target_link_libraries(${LIBPOV_LIBRARY} DeviceHeaders)
-
-# include_directories ("${CMAKE_SOURCE_DIR}/device/include")

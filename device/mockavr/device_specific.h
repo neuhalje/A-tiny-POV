@@ -10,6 +10,6 @@
 #define PROGMEM
 
 #define pgm_read_byte(ptr)  (*(ptr))
-#define memcpy_P(dst,src,len) memcpy(dst,src,len)
+#define memcpy_P(dst, src, len) memcpy(dst,src,len)
 
 #endif //ATPOV_DEVICE_AVR_H
