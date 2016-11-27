@@ -5,7 +5,7 @@
 
 typedef struct {
     const char glyph;
-    uint8_t columns[8];
+    uint8_t columns[GLYPH_WIDTH];
 } FontCharacter;
 
 /*
@@ -60,12 +60,12 @@ bool read_font_char_columns(const char glyph, uint8_t *dst_columns) {
 
     for (uint8_t glyph_index = 0; glyph_index < CHARS_IN_FONT; glyph_index++) {
         if (pgm_read_byte(&(font[glyph_index].glyph)) == glyph) {
-            memcpy_P (dst_columns, &font[glyph_index].columns[0], 8);
+            memcpy_P (dst_columns, &font[glyph_index].columns[0], GLYPH_WIDTH);
             return true;
         };
     }
 
-    memcpy_P(dst_columns, &font[DEFAULT_GLYPH_INDEX].columns[0], 8);
+    memcpy_P(dst_columns, &font[DEFAULT_GLYPH_INDEX].columns[0], GLYPH_WIDTH);
     return false;
 }
 

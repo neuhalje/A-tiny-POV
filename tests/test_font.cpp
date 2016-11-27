@@ -35,7 +35,7 @@ using testing::Eq;
 
 
 TEST(Font, ExistingGlyphIsFound) {
-    uint8_t buffer[8];
+    uint8_t buffer[GLYPH_WIDTH];
     EXPECT_TRUE(read_font_char_columns('a', buffer));
 }
 
@@ -45,32 +45,32 @@ TEST(Font, PassingNullAsBufferFails) {
 }
 
 TEST(Font, NotExistingGlyphIsNotFound) {
-    uint8_t buffer[8];
+    uint8_t buffer[GLYPH_WIDTH];
     EXPECT_FALSE(read_font_char_columns(0xff, buffer)) << "The glyph for 0xff should not be defined";
 }
 
 TEST(Font, GlyphSlashIsReturnedCorrectly) {
-    uint8_t retrieved_glyph[8];
+    uint8_t retrieved_glyph[GLYPH_WIDTH];
     bzero(retrieved_glyph, sizeof(retrieved_glyph));
 
     EXPECT_THAT(read_font_char_columns('/', retrieved_glyph), Eq(true)) << "/ should be found";
 
     const uint8_t expected_glyph[]{1, 2, 4, 8, 16};
 
-    for (int i = 0; i < 8; ++i) {
+    for (int i = 0; i < GLYPH_WIDTH; ++i) {
         EXPECT_EQ(expected_glyph[i], retrieved_glyph[i]) << "expected and retrieved differ at index " << i;
     }
 }
 
 TEST(Font, UnknownGlyphSlashIsReturnedAsOpaque) {
-    uint8_t retrieved_glyph[8];
+    uint8_t retrieved_glyph[GLYPH_WIDTH];
     bzero(retrieved_glyph, sizeof(retrieved_glyph));
 
     EXPECT_THAT(read_font_char_columns(0xff, retrieved_glyph), Eq(false)) << "0xff should NOT be found";
 
     const uint8_t expected_glyph[]{0xff, 0xff, 0xff, 0xff, 0xff};
 
-    for (int i = 0; i < 8; ++i) {
+    for (int i = 0; i < GLYPH_WIDTH; ++i) {
         EXPECT_EQ(expected_glyph[i], retrieved_glyph[i]) << "expected and retrieved differ at index " << i;
     }
 }
