@@ -1,19 +1,17 @@
-
-
 # Listed headers for IDEs even though no code is generated for the static lib
 set(HEADERS
         config.h
-    font.h
-    output.h
+        font.h
+        output.h
 )
 
 set(SOURCES
-    font.c
-    output.c
+        font.c
+        output.c
 )
 
 set(OTHERS
-    libPOV.dox
+        libPOV.dox
 )
 
 
@@ -26,7 +24,8 @@ else()
 endif()
 
 
-target_include_directories(${LIBPOV_LIBRARY} INTERFACE ${CMAKE_SOURCE_DIR})
+target_include_directories(${LIBPOV_LIBRARY} INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR})
+
 set_target_properties(${LIBPOV_LIBRARY} PROPERTIES PREFIX "")
 set_target_properties(${LIBPOV_LIBRARY} PROPERTIES LINKER_LANGUAGE C)
 
