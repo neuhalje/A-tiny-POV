@@ -1,4 +1,6 @@
 #include <stdbool.h>
+#include <stdint.h>
+
 /*
  columns points to an array with at least 8 free bytes
 
