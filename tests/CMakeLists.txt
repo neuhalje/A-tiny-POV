@@ -1,4 +1,4 @@
-find_package(CMocka 1.1.0 REQUIRED)
+cmake_minimum_required(VERSION 3.1)
 
 # Code coverage target for all tests
 if(CMAKE_BUILD_TYPE STREQUAL "Coverage")
@@ -10,7 +10,7 @@ if(CMAKE_BUILD_TYPE STREQUAL "Coverage")
             -r ${CMAKE_SOURCE_DIR}
             --object-directory ${CMAKE_BINARY_DIR}
             -e ${CMAKE_SOURCE_DIR}/tests
-            -e ".*cmocka.*"
+            -e ".*gmock.*"
             -x -o coverage.xml -v -s
         WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
         COMMENT "Converting gcov coverage data to cobertura format with gcovr")
@@ -24,13 +24,47 @@ set(OTHERS
     test.dox
 )
 
-function(add_test_cmocka _NAME)
+
+include(CTest)
+
+if (CMAKE_VERSION VERSION_LESS 3.2)
+    set(UPDATE_DISCONNECTED_IF_AVAILABLE "")
+else()
+    set(UPDATE_DISCONNECTED_IF_AVAILABLE "UPDATE_DISCONNECTED 1")
+endif()
+
+include(DownloadProject.cmake)
+download_project(PROJ                googletest
+                 GIT_REPOSITORY      https://github.com/google/googletest.git
+                 GIT_TAG             master
+                 ${UPDATE_DISCONNECTED_IF_AVAILABLE}
+)
+
+# Prevent GoogleTest from overriding our compiler/linker options
+# when building with Visual Studio
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+
+add_subdirectory(${googletest_SOURCE_DIR} ${googletest_BINARY_DIR})
+
+if (CMAKE_VERSION VERSION_LESS 2.8.11)
+    include_directories("${gtest_SOURCE_DIR}/include"
+            "${gmock_SOURCE_DIR}/include")
+endif()
+
+# Trivial example using gtest and gmock
+add_executable(example_gtest test_example_gtest.cpp)
+target_link_libraries(example_gtest gtest gmock_main libPOV)
+add_test(NAME example_gtest_test COMMAND example_gtest)
+
+
+
+function(add_test_gmock _NAME)
     add_executable(${_NAME} ${ARGN} ${HEADERS} ${OTHERS})
-    target_link_libraries(${_NAME} PRIVATE libPOV ${CMOCKA_LIBRARY})
-    target_include_directories(${_NAME} PRIVATE ${CMOCKA_INCLUDE_DIRS})
+    target_link_libraries(${_NAME} PRIVATE libPOV gtest gmock_mai)
+    target_include_directories(${_NAME} PRIVATE ${GMOCK_INCLUDE_DIRS})
     add_test(
         NAME ${_NAME}
         COMMAND ${_NAME} --gtest_output=xml:${_NAME}.xml)
 endfunction()
 
-add_test_cmocka(test_example test_example.c)
+#add_test_gmock(test_example test_example.cpp)
