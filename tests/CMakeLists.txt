@@ -48,14 +48,15 @@ if (CMAKE_VERSION VERSION_LESS 2.8.11)
             "${gmock_SOURCE_DIR}/include")
 endif()
 
+include_directories(${PROJECT_SOURCE_DIR}/libPOV)
 
 function(add_test_gmock _NAME)
     add_executable(${_NAME} ${ARGN} ${HEADERS} ${OTHERS})
     target_link_libraries(${_NAME} PRIVATE libPOV gtest gmock_main)
-   # target_include_directories(${_NAME} PRIVATE ${GMOCK_INCLUDE_DIRS})
     add_test(
         NAME ${_NAME}
         COMMAND ${_NAME} --gtest_output=xml:${_NAME}.xml)
 endfunction()
 
 add_test_gmock(example_gtest test_example_gtest.cpp)
+add_test_gmock(test_font test_font.cpp)
