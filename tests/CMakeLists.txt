@@ -24,9 +24,6 @@ set(OTHERS
     test.dox
 )
 
-
-include(CTest)
-
 if (CMAKE_VERSION VERSION_LESS 3.2)
     set(UPDATE_DISCONNECTED_IF_AVAILABLE "")
 else()
@@ -51,20 +48,14 @@ if (CMAKE_VERSION VERSION_LESS 2.8.11)
             "${gmock_SOURCE_DIR}/include")
 endif()
 
-# Trivial example using gtest and gmock
-add_executable(example_gtest test_example_gtest.cpp)
-target_link_libraries(example_gtest gtest gmock_main libPOV)
-add_test(NAME example_gtest_test COMMAND example_gtest)
-
-
 
 function(add_test_gmock _NAME)
     add_executable(${_NAME} ${ARGN} ${HEADERS} ${OTHERS})
-    target_link_libraries(${_NAME} PRIVATE libPOV gtest gmock_mai)
-    target_include_directories(${_NAME} PRIVATE ${GMOCK_INCLUDE_DIRS})
+    target_link_libraries(${_NAME} PRIVATE libPOV gtest gmock_main)
+   # target_include_directories(${_NAME} PRIVATE ${GMOCK_INCLUDE_DIRS})
     add_test(
         NAME ${_NAME}
         COMMAND ${_NAME} --gtest_output=xml:${_NAME}.xml)
 endfunction()
 
-#add_test_gmock(test_example test_example.cpp)
+add_test_gmock(example_gtest test_example_gtest.cpp)
