@@ -12,7 +12,7 @@
 # CMOCKA_BINARY_DIR.
 #
 # This module defines the following variables:
-#  CMOCKA_FOUND          - If Google Mock is available
+#  CMOCKA_FOUND          - If cmocka is available
 #  CMOCKA_INCLUDE_DIRS   - Include directories for <cmocka.h>
 #  CMOCKA_LIBRARY        - cmocka Library
 #
@@ -85,38 +85,30 @@ else()
         CMAKE_ARGS ${CMAKE_ARGS}
         SOURCE_DIR ${CMOCKA_SOURCE_DIR}
         BINARY_DIR ${CMOCKA_BINARY_DIR}
-        INSTALL_COMMAND ""
-        UPDATE_COMMAND "")
+)
 endif()
 
 # Set the result variables.
 set(CMOCKA_INCLUDE_DIRS
-    ${CMOCKA_SOURCE_DIR}/include
-    ${CMOCKA_SOURCE_DIR}/gtest/include)
-
-set(GTEST_INCLUDE_DIRS
-    ${CMOCKA_SOURCE_DIR}/gtest/include)
+    ${CMOCKA_SOURCE_DIR}/include)
 
 # Add dependency to the external target so that CMake is able
 # to resolve the dependencies to CMocka libs and builds CMocka first.
 macro(add_CMOCKA_library _name _lib)
     string(TOUPPER "${_name}_LIBRARY" _LIB_VAR)
     set(${_LIB_VAR} ${_name} ${CMAKE_THREAD_LIBS_INIT})
-    add_library(${_name} STATIC IMPORTED)
+    add_library(${_name} SHARED IMPORTED)
     set_target_properties(${_name} PROPERTIES IMPORTED_LOCATION ${_lib})
     add_dependencies(${_name} CMocka)
 endmacro()
 
-add_CMOCKA_library(cmocka ${CMOCKA_BINARY_DIR}/libcmocka.a)
-add_CMOCKA_library(CMOCKA_main ${CMOCKA_BINARY_DIR}/libCMOCKA_main.a)
-add_CMOCKA_library(gtest ${CMOCKA_BINARY_DIR}/gtest/libgtest.a)
-add_CMOCKA_library(gtest_main ${CMOCKA_BINARY_DIR}/gtest/libgtest_main.a)
+add_CMOCKA_library(cmocka ${CMOCKA_BINARY_DIR}/src/libcmocka.0.4.0.dylib)
+#add_CMOCKA_library(CMOCKA_main ${CMOCKA_BINARY_DIR}/libCMOCKA_main.a)
 
-# For CMocka < 1.7.0 GTest symbols are not included in the library
-# and have to be added separately.
-#if(CMOCKA_FIND_VERSION AND CMOCKA_FIND_VERSION VERSION_LESS "1.7.0")
-#    list(APPEND CMOCKA_LIBRARY ${GTEST_LIBRARY})
-#endif()
+set(CMOCKA_LIBRARIES  ${CMOCKA_LIBRARY})
+#set(CMOCKA_LIBRARIES ${CMOCKA_LIBRARY} )
+#set(CMOCKA_INCLUDE_DIRS ${CMOCKA_INCLUDE_DIR} )
+
 
 include(FindPackageHandleStandardArgs)
 find_package_handle_standard_args(CMocka DEFAULT_MSG CMOCKA_SOURCE_DIR)

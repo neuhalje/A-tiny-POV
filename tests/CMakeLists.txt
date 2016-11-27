@@ -10,7 +10,7 @@ if(CMAKE_BUILD_TYPE STREQUAL "Coverage")
             -r ${CMAKE_SOURCE_DIR}
             --object-directory ${CMAKE_BINARY_DIR}
             -e ${CMAKE_SOURCE_DIR}/tests
-            -e ".*gmock.*"
+            -e ".*cmocka.*"
             -x -o coverage.xml -v -s
         WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
         COMMENT "Converting gcov coverage data to cobertura format with gcovr")
@@ -24,13 +24,13 @@ set(OTHERS
     test.dox
 )
 
-function(add_test_gmock _NAME)
+function(add_test_cmocka _NAME)
     add_executable(${_NAME} ${ARGN} ${HEADERS} ${OTHERS})
-    target_link_libraries(${_NAME} PRIVATE libPOV ${GMOCK_BOTH_LIBRARIES})
-    target_include_directories(${_NAME} PRIVATE ${GMOCK_INCLUDE_DIRS})
+    target_link_libraries(${_NAME} PRIVATE libPOV ${CMOCKA_LIBRARY})
+    target_include_directories(${_NAME} PRIVATE ${CMOCKA_INCLUDE_DIRS})
     add_test(
         NAME ${_NAME}
         COMMAND ${_NAME} --gtest_output=xml:${_NAME}.xml)
 endfunction()
 
-#add_test_gmock(test_utils test_utils.cpp)
+add_test_cmocka(test_example test_example.c)
