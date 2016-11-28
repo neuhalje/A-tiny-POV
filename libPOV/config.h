@@ -1,21 +1,29 @@
 #pragma once
 
 /**
- * The message to show
+ * How long does one sweep (left to right) take?
+ *
+ * It should take less than 50ms for the POV effect to work.
  */
-#define MESSAGE "this is a test"
+#define TIME_FOR_ONE_SWEEP_MS 50.0
 
 /**
- * How much time to wait between two columns
- *
- * Time per character: DELAY_CHAR_COLUMN_MS * GLYPH_WIDTH + DELAY_AFTER_CHAR_MS
+ * The message to show
  */
-#define DELAY_CHAR_COLUMN_MS 10
+#define MESSAGE "hello"
 
-#define DELAY_AFTER_CHAR_MS (2*DELAY_CHAR_COLUMN_MS)
+/**
+ * How large is the letter spacing column after a glyph.
+ *
+ * Unit: times 'a column of a glyph'
+ *
+ * E.g. 1.2 --> Letter spacing is 1.2 as wide as a column in a glyph
+ */
+#define DELAY_AFTER_GLYPH_FACTOR 1.2
+
 
 /*
  * How much time to give the human to reverse waving direction
  */
-#define DELAY_REVERSE_WAVING_MS 30
+#define DELAY_REVERSE_WAVING_MS 2
 
