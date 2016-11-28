@@ -55,8 +55,12 @@ const FontCharacter font[CHARS_IN_FONT] PROGMEM = {
  Binary search might be faster, but we are talking about
  lg_2(CHARS_IN_FONT) vs. CHARS_IN_FONT/2  (5 vs 16) comparisons.
 */
-bool read_font_char_columns(const char glyph, uint8_t *dst_columns) {
+bool read_font_char_columns(char glyph, uint8_t *dst_columns) {
     if (dst_columns == NULL) { return false; }
+
+    if (glyph >= 'A' && glyph <= 'Z') {
+        glyph = (char) (glyph - 'A' + 'a');
+    }
 
     for (uint8_t glyph_index = 0; glyph_index < CHARS_IN_FONT; glyph_index++) {
         if (pgm_read_byte(&(font[glyph_index].glyph)) == glyph) {

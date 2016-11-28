@@ -74,3 +74,8 @@ TEST(Font, UnknownGlyphSlashIsReturnedAsOpaque) {
         EXPECT_EQ(expected_glyph[i], retrieved_glyph[i]) << "expected and retrieved differ at index " << i;
     }
 }
+
+TEST(Font, UppercaseGlyphsAreFound) {
+    uint8_t buffer[GLYPH_WIDTH];
+    EXPECT_TRUE(read_font_char_columns('A', buffer)) << "For not existing upper-case  glyphs: return matching lower-case glyph";
+}
