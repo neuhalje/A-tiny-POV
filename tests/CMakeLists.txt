@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.1)
+cmake_minimum_required(VERSION 3.0.2)
 
 # Code coverage target for all tests
 if (CMAKE_BUILD_TYPE STREQUAL "Coverage")

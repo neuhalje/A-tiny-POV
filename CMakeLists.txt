@@ -1,5 +1,5 @@
 # Project setup ---------------------------------------------------------------
-cmake_minimum_required(VERSION 3.1)
+cmake_minimum_required(VERSION 3.0.2)
 project(atPOV)
 
 # Show additional project files in IDEs (e.g. QtCreator)
