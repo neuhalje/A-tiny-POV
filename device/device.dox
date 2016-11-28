@@ -4,19 +4,18 @@
  * \brief AVR dependent code.
  *
  * This module contains the AVR dependent code parts:
- * - \ref libPOV
+ * - \ref avr  AVR specific implementations
+ * - \ref mockavr  Mocks/Stubs for PC based builds
  *
- * \copydoc targets
+ * \copydoc devices
  *
- * The Implementation is based on AVR libc
- * (http://www.nongnu.org/avr-libc/user-manual/index.html).
  */
 
 /*!
- * \defgroup targets Supported targets
- * \ingroup target
+ * \defgroup devices Supported devices
+ * \ingroup device
  *
- * \brief Supported targets.
+ * \brief Supported devices.
  *
  * The build system is configured to support the following targets:
  * - \ref arduino (untested)
