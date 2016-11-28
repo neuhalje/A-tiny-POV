@@ -1,5 +1,5 @@
-atTiny POV - atTiny85 based Persistence of View
-=========================================
+A tiny POV - ATtiny85 based Persistence of View
+================================================
 
 TODO
 
@@ -15,22 +15,13 @@ mainly for testing purposes.
     $ cd <build dir>
     $ cmake <source dir>
 
+Alternatively call `build_local.sh` to create and run an out of source build.
+
 ### Cross compilation & flashing
 A different configuration is needed to setup cross compilation and flashing for
-ATmega based targets. For this purpose [cmake-avr] has to be available on
-the build machine.
+ATtiny based targets. For this purpose a copy of [cmake-avr] has been included.
 
-In order to use [cmake-avr] the `CMAKE_TOOLCHAIN_FILE` variable has to be set
-as well as a few other configuration variables.
-
-Exemplary usage for an Arduino Uno:
-
-    $ cd <build dir>
-    $ cmake -DCMAKE_TOOLCHAIN_FILE=<cmake-avr dir>/generic-gcc-avr.cmake \
-            -DTARGET_CONFIGURATION=arduino -DAVR_MCU=atmega328p \
-            -DAVR_PROGRAMMER=arduino -DAVR_UPLOADTOOL_PORT=/dev/ttyACM0 \
-            <source dir>
-    $ make && make upload_sensors
+Compile and flash for ATtiny85 `build_attiny.sh`
 
 Please see the cmake-avr documentation for more configuration options.
 
@@ -45,11 +36,7 @@ because wrapper funciton are needed.
 
 ```text
 <root>/
-   src/
-    main.c  <-- main ("driver") when compiling for the device
-   include/
-    ???
-   lib/
+ TODO
 ```
 
 
