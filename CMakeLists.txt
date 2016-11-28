@@ -13,15 +13,18 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}
 # Options and configuration ---------------------------------------------------
 
 # Target specific configuration for cross compiling with cmake-avr
-# (cmake-avr https://github.com/mkleemann/cmake-avr)
+# ( cmake-avr https://github.com/mkleemann/cmake-avr )
 if (CMAKE_CROSSCOMPILING AND CMAKE_SYSTEM_PROCESSOR STREQUAL "avr")
     set(TARGET_CONFIGURATION arduino CACHE STRING "Target configuration")
-    set(TARGET_CONFIGURATIONS arduino atdemo)
+    set(TARGET_CONFIGURATIONS arduino attiny85)
     list(FIND TARGET_CONFIGURATIONS ${TARGET_CONFIGURATION} _INDEX)
     if (_INDEX LESS 0)
-        message(FATAL_ERROR "Target configuration '${TARGET_CONFIGURATION}'"
-                "does not exist. Valid target configurations: "
-                ${VALID_TARGET_CONFIGURATIONS})
+        message(STATUS "Target configuration '${TARGET_CONFIGURATION}' "
+                "does not exist. Valid target configurations: ")
+        foreach (_target ${TARGET_CONFIGURATIONS})
+            message(STATUS " - ${_target}")
+        endforeach()
+        message(FATAL_ERROR "Invalid target ${TARGET_CONFIGURATION}")
     endif ()
 endif ()
 

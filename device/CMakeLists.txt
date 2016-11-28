@@ -35,7 +35,7 @@ if (TARGET_CONFIGURATION STREQUAL "arduino")
             pov-${AVR_MCU}.elf
             libPOV-${AVR_MCU}
             libdevice-${AVR_MCU})
-elseif (TARGET_CONFIGURATION STREQUAL "avr")
+elseif (TARGET_CONFIGURATION STREQUAL "attiny85")
     add_definitions(-DF_CPU=8000000UL)
     add_definitions(-DVCC=5000U)
 
