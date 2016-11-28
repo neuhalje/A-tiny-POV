@@ -2,4 +2,3 @@
 *.hex
 *.elf
 .idea/
-cmake-*/
