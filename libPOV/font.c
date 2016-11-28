@@ -1,7 +1,7 @@
-#include "device.h"
-//#include "device_avr.h"
 #include <stdbool.h>
+#include <stddef.h>
 #include "font.h"
+#include "device.h"
 
 typedef struct {
     const char glyph;

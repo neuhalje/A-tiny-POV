@@ -1,7 +1,11 @@
 #include <stdbool.h>
 #include <stdint.h>
 #include <string.h>
-#include "custom.h"
+
+#include <util/delay.h>
+#include <avr/io.h>
+
+#include "config.h"
 #include "output.h"
 
 /*
