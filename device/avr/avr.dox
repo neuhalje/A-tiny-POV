@@ -1,0 +1,10 @@
+/*!
+ * \defgroup avr ATtiny85
+ * \ingroup device
+ * \implements device_interface
+ *
+ * \brief AVR (ATtiny85) specific adapters.
+ *
+ * \copydoc device
+ *
+ */

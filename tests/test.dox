@@ -1,10 +1,10 @@
 /*!
- * \defgroup libPOV_tests Unit tests
+ * \defgroup unittests Unit tests
  * \ingroup libPOV
  *
  * \brief Unit tests for \ref libPOV
  *
- * The unit tests are intendet to be executed on the host for development,
+ * The unit tests are intended to be executed on the host for development,
  * therefore the restrictions on the library do not apply and all C++ language
  * features including STL can be used.
  */

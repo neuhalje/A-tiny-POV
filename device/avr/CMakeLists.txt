@@ -8,7 +8,7 @@ set(SOURCES
         )
 
 set(OTHERS
-        #    libtarget.dox
+            avr.dox
         )
 
 set(LIBDEVICE_LIBRARY libdevice)

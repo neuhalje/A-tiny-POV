@@ -1,0 +1,10 @@
+/*!
+ * \defgroup mockavr  mockavr
+ * \ingroup device
+ * \implements device_interface
+ *
+ * \brief  Mocking AVR (ATtiny85) specifics to compile unit tests.
+ *
+ * \copydoc device
+ *
+ */

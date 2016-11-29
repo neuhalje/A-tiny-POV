@@ -1,7 +1,7 @@
 /*!
- * \defgroup target Hardware/target specific
+ * \defgroup device Device specific adapters
  *
- * \brief AVR dependent code.
+ * \brief  Hardware/target specific bridging code.
  *
  * This module contains the AVR dependent code parts:
  * - \ref avr  AVR specific implementations
@@ -17,7 +17,9 @@
  *
  * \brief Supported devices.
  *
+ * TODO: remove me (in device.dox)
+ *
  * The build system is configured to support the following targets:
- * - \ref arduino (untested)
- * - \ref attiny85
+ * - arduino (untested)
+ * - attiny85
  */
