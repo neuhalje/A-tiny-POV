@@ -71,7 +71,7 @@ delay_ms(const uint16_t ms) {
     extern void __builtin_avr_delay_cycles(unsigned long);
 
     for (uint16_t bit = 1; bit < 16; bit++) {
-        if (ms & 1 >> bit) __builtin_avr_delay_cycles(__ticks_dc_per_ms >> bit);
+        if (ms & (1 << bit)) __builtin_avr_delay_cycles(__ticks_dc_per_ms << bit);
     }
 }
 
@@ -90,7 +90,7 @@ delay_us(const uint16_t us) {
     extern void __builtin_avr_delay_cycles(unsigned long);
 
     for (uint16_t bit = 1; bit < 16; bit++) {
-        if (us & 1 >> bit) __builtin_avr_delay_cycles(__ticks_dc_per_us >> bit);
+        if (us & (1 << bit)) __builtin_avr_delay_cycles(__ticks_dc_per_us << bit);
     }
 }
 
