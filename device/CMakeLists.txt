@@ -24,11 +24,11 @@ set(OTHERS
  #       target.dox
         )
 
+include_directories(${PROJECT_SOURCE_DIR}/libPOV)
+
 if (TARGET_CONFIGURATION STREQUAL "arduino")
     add_definitions(-DF_CPU=16000000UL)
     add_definitions(-DVCC=5000U)
-
-    include_directories(${PROJECT_SOURCE_DIR}/libPOV)
 
     add_subdirectory(avr)
 
@@ -44,9 +44,6 @@ if (TARGET_CONFIGURATION STREQUAL "arduino")
 elseif (TARGET_CONFIGURATION STREQUAL "attiny85")
     add_definitions(-DF_CPU=8000000UL)
     add_definitions(-DVCC=5000U)
-
-    include_directories(${PROJECT_SOURCE_DIR}/libPOV)
-
     add_subdirectory(avr)
 
     add_avr_executable(pov ${HEADERS} ${SOURCES} ${OTHERS})
