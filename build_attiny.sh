@@ -3,7 +3,7 @@
 ##### Configuration
 #
 
-UPLOAD_PORT=/dev/ttyACM0
+UPLOAD_PORT=/dev/spidev0.0
 AVR_PROGRAMMER=linuxspi
 
 AVR_L_FUSE=
