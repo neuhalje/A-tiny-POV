@@ -11,6 +11,7 @@
  * The message to show
  */
 #define MESSAGE "hello"
+#define MESSAGE_LEN  5
 
 /**
  * How large is the letter spacing column after a glyph.

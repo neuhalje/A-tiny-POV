@@ -9,8 +9,6 @@
 #include "output.h"
 #include "font.h"
 
-double DELAY_AFTER_GLYPH_COLUMN_MS;
-double DELAY_AFTER_GLYPH_MS;
 
 /**
  * How much time to wait between two columns.
@@ -20,9 +18,11 @@ double DELAY_AFTER_GLYPH_MS;
  * Sweep duration is given by TIME_FOR_ONE_SWEEP_MS
  *
  */
-double delayCharColumnMs(uint8_t number_of_glyphs)  {
-    return (TIME_FOR_ONE_SWEEP_MS / (number_of_glyphs * (GLYPH_WIDTH + DELAY_AFTER_GLYPH_FACTOR)));
-}
+#define WAIT_BETWEEN_COLUMNS_MS(number_of_glyphs) ((1.0 * TIME_FOR_ONE_SWEEP_MS / (number_of_glyphs * (GLYPH_WIDTH + DELAY_AFTER_GLYPH_FACTOR))))
+
+#define DELAY_AFTER_GLYPH_COLUMN_MS  WAIT_BETWEEN_COLUMNS_MS(MESSAGE_LEN)
+#define  DELAY_AFTER_GLYPH_MS  (DELAY_AFTER_GLYPH_COLUMN_MS * DELAY_AFTER_GLYPH_FACTOR)
+
 
 
 /*
@@ -51,18 +51,13 @@ int main(void) {
     PORTB = 0x00; // Make pins low to start
 
     const char *message = MESSAGE;
-    uint8_t message_len = strlen(message);
-
-    DELAY_AFTER_GLYPH_COLUMN_MS =  delayCharColumnMs(strlen(message));
-    DELAY_AFTER_GLYPH_MS = DELAY_AFTER_GLYPH_COLUMN_MS * DELAY_AFTER_GLYPH_FACTOR;
-
     for (;;) {
         // The PO Vis created by quickly waving the stick left
         // to right and back.
 
-        write_string(message, message_len);
+        write_string(message, MESSAGE_LEN);
         wait_for_reverse_waving_direction();
-        write_string_reverse(message, message_len);
+        write_string_reverse(message, MESSAGE_LEN);
         wait_for_reverse_waving_direction();
     }
     return 0;
