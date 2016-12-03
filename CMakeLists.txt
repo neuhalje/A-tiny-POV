@@ -37,8 +37,13 @@ option(BUILD_DOCUMENTATION "Build documentation" ON)
 # Build targets ---------------------------------------------------------------
 
 # Default compiler options
-set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
+if ( ${CMAKE_VERSION} VERSION_LESS 3.1.0)
+   add_compile_options(-std=c11)
+else ()
+   set(CMAKE_CXX_STANDARD 11)
+   set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
+endif ()
+
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra")
 
 # Set target device compiler defines
