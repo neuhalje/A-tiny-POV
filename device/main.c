@@ -25,7 +25,6 @@
 #define  DELAY_AFTER_GLYPH_US  (DELAY_AFTER_GLYPH_COLUMN_US * DELAY_AFTER_GLYPH_FACTOR)
 
 
-
 /*
 * Wait until the stick changes waving direction
 */
@@ -61,5 +60,4 @@ int main(void) {
         write_string_reverse(message, MESSAGE_LEN);
         wait_for_reverse_waving_direction();
     }
-    return 0;
 }
