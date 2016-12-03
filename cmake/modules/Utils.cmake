@@ -2,6 +2,8 @@
 # Utility functions.
 #  Copied from <https://github.com/fetzerch/atMETEO/blob/master/cmake/modules/FindGMock.cmake>
 
+cmake_minimum_required(VERSION 3.0.2)
+
 # String padding
 function(string_padding _STRING _LENGTH _DEST)
     string(LENGTH "${_STRING}" _STRING_LEN)
