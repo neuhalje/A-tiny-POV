@@ -2,8 +2,9 @@
 #include <stdint.h>
 #include <string.h>
 
-#include <util/delay.h>
 #include <avr/io.h>
+
+#include "device.h"
 
 #include "config.h"
 #include "output.h"
@@ -18,10 +19,10 @@
  * Sweep duration is given by TIME_FOR_ONE_SWEEP_MS
  *
  */
-#define WAIT_BETWEEN_COLUMNS_MS(number_of_glyphs) ((1.0 * TIME_FOR_ONE_SWEEP_MS / (number_of_glyphs * (GLYPH_WIDTH + DELAY_AFTER_GLYPH_FACTOR))))
+#define WAIT_BETWEEN_COLUMNS_US(number_of_glyphs) ((1000.0 * TIME_FOR_ONE_SWEEP_MS / (number_of_glyphs * (GLYPH_WIDTH + DELAY_AFTER_GLYPH_FACTOR))))
 
-#define DELAY_AFTER_GLYPH_COLUMN_MS  WAIT_BETWEEN_COLUMNS_MS(MESSAGE_LEN)
-#define  DELAY_AFTER_GLYPH_MS  (DELAY_AFTER_GLYPH_COLUMN_MS * DELAY_AFTER_GLYPH_FACTOR)
+#define DELAY_AFTER_GLYPH_COLUMN_US  WAIT_BETWEEN_COLUMNS_US(MESSAGE_LEN)
+#define  DELAY_AFTER_GLYPH_US  (DELAY_AFTER_GLYPH_COLUMN_US * DELAY_AFTER_GLYPH_FACTOR)
 
 
 
@@ -29,20 +30,20 @@
 * Wait until the stick changes waving direction
 */
 void wait_for_reverse_waving_direction() {
-    _delay_ms(DELAY_REVERSE_WAVING_MS);
+    delay_us(1000 * DELAY_REVERSE_WAVING_MS);
 }
 
 void write_string(const char *message, uint8_t message_len) {
     for (uint8_t i = 0; i < message_len; i++) {
-        output_char(message[i], DELAY_AFTER_GLYPH_COLUMN_MS);
-        _delay_ms(DELAY_AFTER_GLYPH_MS);
+        output_char(message[i], DELAY_AFTER_GLYPH_COLUMN_US);
+        delay_us(DELAY_AFTER_GLYPH_US);
     }
 }
 
 void write_string_reverse(const char *message, uint8_t message_len) {
     for (uint8_t i = message_len - 1; i > 0; i--) {
-        _delay_ms(DELAY_AFTER_GLYPH_MS);
-        output_char_rev(message[i], DELAY_AFTER_GLYPH_COLUMN_MS);
+        delay_ms(DELAY_AFTER_GLYPH_US);
+        output_char_rev(message[i], DELAY_AFTER_GLYPH_COLUMN_US);
     }
 }
 

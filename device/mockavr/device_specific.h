@@ -7,6 +7,8 @@
  * Contains mocks for builds targeted at the build system (unit tests)
  */
 
+#define F_CPU 1
+
 #define PROGMEM
 
 #define pgm_read_byte(ptr)  (*(ptr))
