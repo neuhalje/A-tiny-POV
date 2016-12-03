@@ -41,6 +41,17 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra")
 
+# Set target device compiler defines
+if (TARGET_CONFIGURATION STREQUAL "arduino")
+    add_definitions(-DF_CPU=16000000UL)
+    add_definitions(-DVCC=5000U)
+elseif (TARGET_CONFIGURATION STREQUAL "attiny85")
+    add_definitions(-DF_CPU=8000000UL)
+    add_definitions(-DVCC=5000U)
+else ()
+    # Nothing to add
+endif ()
+
 # Code coverage build type
 set(CMAKE_CONFIGURATION_TYPES ${CMAKE_CONFIGURATION_TYPES} Coverage)
 set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS

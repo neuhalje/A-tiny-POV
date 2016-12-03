@@ -26,24 +26,8 @@ set(OTHERS
 
 include_directories(${PROJECT_SOURCE_DIR}/libPOV)
 
-if (TARGET_CONFIGURATION STREQUAL "arduino")
-    add_definitions(-DF_CPU=16000000UL)
-    add_definitions(-DVCC=5000U)
 
-    add_subdirectory(avr)
-
-    add_avr_executable(pov ${HEADERS} ${SOURCES} ${OTHERS})
-    target_link_libraries(
-            pov-${AVR_MCU}.elf
-            libPOV-${AVR_MCU}
-            libdevice-${AVR_MCU})
-
-    target_include_directories(DeviceHeaders INTERFACE
-            $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/avr/>
-            )
-elseif (TARGET_CONFIGURATION STREQUAL "attiny85")
-    add_definitions(-DF_CPU=8000000UL)
-    add_definitions(-DVCC=5000U)
+if (CMAKE_CROSSCOMPILING AND CMAKE_SYSTEM_PROCESSOR STREQUAL "avr")
     add_subdirectory(avr)
 
     add_avr_executable(pov ${HEADERS} ${SOURCES} ${OTHERS})
