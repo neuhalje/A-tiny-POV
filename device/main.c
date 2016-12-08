@@ -24,6 +24,10 @@
 #define DELAY_AFTER_GLYPH_COLUMN_US  WAIT_BETWEEN_COLUMNS_US(MESSAGE_LEN)
 #define  DELAY_AFTER_GLYPH_US  (DELAY_AFTER_GLYPH_COLUMN_US * DELAY_AFTER_GLYPH_FACTOR)
 
+/**
+ * Empty column shown after a glyph (apace between two glyphs)
+ */
+static const uint8_t COLUMN_AFTER_GLYPH = 0;
 
 /*
 * Wait until the stick changes waving direction
@@ -35,13 +39,15 @@ void wait_for_reverse_waving_direction() {
 void write_string(const char *message, uint8_t message_len) {
     for (uint8_t i = 0; i < message_len; i++) {
         output_char(message[i], DELAY_AFTER_GLYPH_COLUMN_US);
+        show_column(COLUMN_AFTER_GLYPH);
         delay_us(DELAY_AFTER_GLYPH_US);
     }
 }
 
 void write_string_reverse(const char *message, uint8_t message_len) {
     for (uint8_t i = message_len - 1; i > 0; i--) {
-        delay_ms(DELAY_AFTER_GLYPH_US);
+        show_column(COLUMN_AFTER_GLYPH);
+        delay_us(DELAY_AFTER_GLYPH_US);
         output_char_rev(message[i], DELAY_AFTER_GLYPH_COLUMN_US);
     }
 }
