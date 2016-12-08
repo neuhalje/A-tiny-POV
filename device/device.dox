@@ -1,5 +1,5 @@
 /*!
- * \defgroup device Device specific adapters
+ * \defgroup device Device agnostic interface
  *
  * \brief  Hardware/target specific bridging code.
  *
@@ -9,17 +9,4 @@
  *
  * \copydoc devices
  *
- */
-
-/*!
- * \defgroup devices Supported devices
- * \ingroup device
- *
- * \brief Supported devices.
- *
- * TODO: remove me (in device.dox)
- *
- * The build system is configured to support the following targets:
- * - arduino (untested)
- * - attiny85
  */

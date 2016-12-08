@@ -1,7 +1,9 @@
-A tiny POV - ATtiny85 based Persistence of View
+A tiny POV - ATtiny85 based Persistence of Vision
 ================================================
 
-TODO
+To quote [Wikipedia](https://en.wikipedia.org/wiki/Persistence_of_vision):
+
+> Persistence of vision refers to the optical illusion whereby multiple discrete images blend into a single image in the human mind and believed to be the explanation for motion perception in cinema and animated films. Like other illusions of visual perception, it is produced by certain characteristics of the visual system.
 
 
 Building

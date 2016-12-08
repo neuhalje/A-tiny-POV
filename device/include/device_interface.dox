@@ -1,7 +1,0 @@
-/*!
- * \defgroup device_interface Device interface
- * \ingroup device
- * \interface device_interface
- *
- * \brief Target architecture agnostic external interface for devices
- */

@@ -1,5 +1,5 @@
 /*
- * atPOV - An ATtiny based persistence of view
+ * atPOV - An ATtiny based persistence of vision
  * Copyright (C) 2016 Jens Neuhalfen
  *
  * This program is free software; you can redistribute it and/or modify

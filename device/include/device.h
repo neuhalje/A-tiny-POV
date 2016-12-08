@@ -1,5 +1,5 @@
 /*
- * atPOV - ATtiny based Persistence Of View gadget
+ * atPOV - ATtiny based Persistence Of Vision gadget
  *
  * Copyright (C) 2016 Jens Neuhalfen
  *
@@ -22,49 +22,45 @@
 
 /*!
  * \file
- * \ingroup devices
+ * \ingroup device
  *
- * \brief Hardware abstractions for \rev libPOV and \ref tests.
+ * \brief Hardware abstractions for \ref libPOV and \ref libPOV_tests.
  *
  */
 
 #include <stdint.h>
 #include "device_specific.h"
 
+#if !defined(__DOXYGEN__)
+static __inline__ void delay_us(const uint16_t __us) __attribute__((__always_inline__));
+static __inline__ void delay_ms(const uint16_t __ms) __attribute__((__always_inline__));
+#endif
 
 /*!
- * \addtogroup devices
+*  \interface device_interface
+ * \addtogroup device
  * \{
  */
 
 /*!
  * \brief Output \p column on the LEDs.
  * \param column Bit encoded state of the LEDs (0: off, 1: on).
- *               LEDs are identified LSB (bottom) to MSB (top) of the glyph
+ *               LEDs are counted from the bottom (LSB) to
+ *               the top (MSB) of the glyph.
  * \return void
  */
 void show_column(uint8_t column);
 
 
 
-#if !defined(__DOXYGEN__)
-
-static __inline__ void delay_us(uint16_t __us) __attribute__((__always_inline__));
-
-static __inline__ void delay_ms(uint16_t __ms) __attribute__((__always_inline__));
-
-#endif
-
-/**
-    \ingroup util_delay
-
-    Perform a busy wait  of \c ms milliseconds.
-
-    The macro F_CPU is supposed to be defined to a
-    constant defining the CPU clock frequency (in Hertz).
-  */
-void
-delay_ms(const uint16_t ms) {
+/*!
+* \brief Perform a busy wait  of \c ms milliseconds.
+* \param ms Number of milliseconds to wait
+*
+* The macro F_CPU is supposed to be defined to a
+* constant defining the CPU clock frequency (in Hertz).
+*/
+void delay_ms(const uint16_t ms) {
 
     const uint32_t __ticks_dc_per_ms = ((F_CPU) / 1e3);
 
@@ -75,16 +71,13 @@ delay_ms(const uint16_t ms) {
     }
 }
 
-/**
-    \ingroup util_delay
-
-    Perform a busy wait of \c us microseconds.
-
-    The macro F_CPU is supposed to be defined to a
-    constant defining the CPU clock frequency (in Hertz).
-  */
-void
-delay_us(const uint16_t us) {
+/*!
+* \brief Perform a busy wait of \c us microseconds.
+*
+*  The macro F_CPU is supposed to be defined to a
+*  constant defining the CPU clock frequency (in Hertz).
+*/
+void delay_us(const uint16_t us) {
     const uint32_t __ticks_dc_per_us = ((F_CPU) / 1e6);
 
     extern void __builtin_avr_delay_cycles(unsigned long);
