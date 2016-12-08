@@ -1,5 +1,13 @@
 cmake_minimum_required(VERSION 3.0.2)
 
+
+# Default compiler options
+if ( ${CMAKE_VERSION} VERSION_LESS 3.1.0)
+    # The main CMakeLists sets the *C* standard.
+    # GoogleTest is c++ though
+    add_compile_options(-std=c++11)
+endif ()
+
 # Code coverage target for all tests
 if (CMAKE_BUILD_TYPE STREQUAL "Coverage")
     find_package(PythonInterp REQUIRED)
