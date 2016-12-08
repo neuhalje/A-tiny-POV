@@ -32,4 +32,4 @@ cmake -DCMAKE_TOOLCHAIN_FILE="${CMAKE_AVR_FILE}" \
     -DAVR_PROGRAMMER=${AVR_PROGRAMMER} -DAVR_UPLOADTOOL_PORT=${UPLOAD_PORT} \
     "$SRC_DIR"
 
-make && make upload_pov
+make && sudo make upload_pov
