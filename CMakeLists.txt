@@ -26,6 +26,8 @@ if (CMAKE_CROSSCOMPILING AND CMAKE_SYSTEM_PROCESSOR STREQUAL "avr")
         endforeach()
         message(FATAL_ERROR "Invalid target ${TARGET_CONFIGURATION}")
     endif ()
+
+    set(AVR_UPLOADTOOL_OPTIONS "" CACHE STRING "Options for avrdude")
 endif ()
 
 # Options
@@ -105,6 +107,7 @@ if (CMAKE_CROSSCOMPILING AND CMAKE_SYSTEM_PROCESSOR STREQUAL "avr")
     status_message("AVR upload tool" AVR_UPLOADTOOL)
     status_message("AVR upload tool port" AVR_UPLOADTOOL_PORT)
     status_message("AVR programmer" AVR_PROGRAMMER)
+    status_message("AVR OPTIONS" AVR_UPLOADTOOL_OPTIONS)
 else ()
     status_message("Compiling for local system")
 endif ()
