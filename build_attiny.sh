@@ -20,7 +20,7 @@ function src_root()
 }
 
 BUILD_DIR=$(mktemp -d "${TMPDIR:-/tmp/}$(basename $0).XXXXXXXXXXXX")
-SRC_DIR=$(src_root)
+SRC_DIR="$(src_root)"
 
 CMAKE_AVR_FILE="${SRC_DIR}/cmake/cmake-avr/generic-gcc-avr.cmake"
 
