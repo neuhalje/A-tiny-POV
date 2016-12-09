@@ -19,8 +19,8 @@ else ()
     message(FATAL_ERROR "Crosscompiling required for ${LIBDEVICE_LIBRARY} on avr")
 endif ()
 
-set_target_properties(${LIBDEVICE_LIBRARY} PROPERTIES PREFIX "")
-set_target_properties(${LIBDEVICE_LIBRARY} PROPERTIES LINKER_LANGUAGE CXX)
+#set_target_properties(${LIBDEVICE_LIBRARY} PROPERTIES PREFIX "")
+#set_target_properties(${LIBDEVICE_LIBRARY} PROPERTIES LINKER_LANGUAGE CXX)
 target_include_directories(${LIBDEVICE_LIBRARY}
         PUBLIC ${CMAKE_SOURCE_DIR}
         )

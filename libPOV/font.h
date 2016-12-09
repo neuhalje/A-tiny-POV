@@ -12,7 +12,7 @@ public:
      *
      * @return
      */
-    virtual uint8_t glyph_width() const;
+    uint8_t glyph_width() const;
 
     /*!
      \brief read a \ref  glyph into \ref columns
@@ -26,5 +26,9 @@ public:
     */
     bool read_font_char_columns(const char glyph, uint8_t *columns);
 
-    virtual ~Font(){};
+     // AVR does not support new and delete
+     // http://www.avrfreaks.net/forum/c-new-delete-operator-confusion?name=PNphpBB2&file=viewtopic&t=44295
+     // Not implementing this will make the test compile complain about non-virtual destructor.
+     // This is fine, since the one instance is never deleted on the AVR
+     // ~Font()  = delete;
 };

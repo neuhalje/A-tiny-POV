@@ -17,8 +17,8 @@ if (CMAKE_CROSSCOMPILING AND CMAKE_SYSTEM_PROCESSOR STREQUAL "avr")
 else ()
 endif ()
 
-set_target_properties(${LIBDEVICE_LIBRARY} PROPERTIES PREFIX "")
-set_target_properties(${LIBDEVICE_LIBRARY} PROPERTIES LINKER_LANGUAGE CXX)
+#set_target_properties(${LIBDEVICE_LIBRARY} PROPERTIES PREFIX "")
+#set_target_properties(${LIBDEVICE_LIBRARY} PROPERTIES LINKER_LANGUAGE CXX)
 target_include_directories(${LIBDEVICE_LIBRARY}
         PUBLIC ${CMAKE_SOURCE_DIR}
         )
