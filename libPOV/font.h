@@ -7,6 +7,13 @@
 class Font {
 
 public:
+    Font() = default;
+    Font(Font&&) = default;
+
+    // prevent calls to unwanted generated functions
+    Font(const Font&) = delete;
+    Font& operator= (const Font&) = delete;
+
     /*!
      * \brief glyph width in pixels
      *

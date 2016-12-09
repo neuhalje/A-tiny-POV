@@ -6,7 +6,10 @@ void Device::show_column(uint8_t column) {
 }
 
 
-/*!
- * NOOP Implementation for local compilation.
- */
-void __builtin_avr_delay_cycles(unsigned long dummy) {};
+void Device::delay_ms(const uint16_t ms) {
+    // NOOP
+}
+
+void Device::delay_us(const uint16_t us) {
+   // NOOP
+}

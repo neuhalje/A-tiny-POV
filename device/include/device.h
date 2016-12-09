@@ -58,16 +58,7 @@ public:
     * The macro F_CPU is supposed to be defined to a
     * constant defining the CPU clock frequency (in Hertz).
     */
-    void delay_ms(const uint16_t ms) {
-
-        const uint32_t __ticks_dc_per_ms = ((F_CPU) / 1e3);
-
-        extern void __builtin_avr_delay_cycles(unsigned long);
-
-        for (uint16_t bit = 1; bit < 16; bit++) {
-            if (ms & (1 << bit)) __builtin_avr_delay_cycles(__ticks_dc_per_ms << bit);
-        }
-    }
+    void delay_ms(const uint16_t ms);
 
     /*!
     * \brief Perform a busy wait of \c us microseconds.
@@ -75,15 +66,7 @@ public:
     *  The macro F_CPU is supposed to be defined to a
     *  constant defining the CPU clock frequency (in Hertz).
     */
-    void delay_us(const uint16_t us) {
-        const uint32_t __ticks_dc_per_us = ((F_CPU) / 1e6);
-
-        extern void __builtin_avr_delay_cycles(unsigned long);
-
-        for (uint16_t bit = 1; bit < 16; bit++) {
-            if (us & (1 << bit)) __builtin_avr_delay_cycles(__ticks_dc_per_us << bit);
-        }
-    }
+    void delay_us(const uint16_t us);
 
 /*! \} */
 
