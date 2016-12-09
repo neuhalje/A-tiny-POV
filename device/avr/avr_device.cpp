@@ -4,6 +4,6 @@
 
 #include "device.h"
 
-inline  void show_column(uint8_t column) {
+inline  void Device::show_column(uint8_t column) {
     PORTB = column;
 }

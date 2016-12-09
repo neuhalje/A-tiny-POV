@@ -17,7 +17,7 @@ set(HEADERS
         )
 
 set(SOURCES
-        main.c
+        main.cpp
         )
 
 set(OTHERS

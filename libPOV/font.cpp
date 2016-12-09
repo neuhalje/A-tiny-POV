@@ -3,6 +3,8 @@
 #include "font.h"
 #include "device.h"
 
+#define GLYPH_WIDTH 5
+
 typedef struct {
     const char glyph;
     uint8_t columns[GLYPH_WIDTH];
@@ -55,7 +57,7 @@ const FontCharacter font[CHARS_IN_FONT] PROGMEM = {
  Binary search might be faster, but we are talking about
  lg_2(CHARS_IN_FONT) vs. CHARS_IN_FONT/2  (5 vs 16) comparisons.
 */
-bool read_font_char_columns(char glyph, uint8_t *dst_columns) {
+bool Font::read_font_char_columns(char glyph, uint8_t *dst_columns) {
     if (dst_columns == NULL) { return false; }
 
     if (glyph >= 'A' && glyph <= 'Z') {
@@ -71,6 +73,10 @@ bool read_font_char_columns(char glyph, uint8_t *dst_columns) {
 
     memcpy_P(dst_columns, &font[DEFAULT_GLYPH_INDEX].columns[0], GLYPH_WIDTH);
     return false;
+}
+
+uint8_t Font::glyph_width() const {
+    return GLYPH_WIDTH;
 }
 
 

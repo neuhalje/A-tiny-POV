@@ -2,12 +2,12 @@
 set(HEADERS
         config.h
         font.h
-        output.h
+        display.h
         )
 
 set(SOURCES
-        font.c
-        output.c
+        font.cpp
+        display.cpp
         )
 
 set(OTHERS

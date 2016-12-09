@@ -33,49 +33,68 @@ extern "C" {
 
 using testing::Eq;
 
+class FontTest : public ::testing::Test {
+protected:
 
-TEST(Font, ExistingGlyphIsFound) {
-    uint8_t buffer[GLYPH_WIDTH];
-    EXPECT_TRUE(read_font_char_columns('a', buffer));
+    Font *_sut;
+
+    virtual void SetUp() {
+        _sut = new Font();
+    }
+
+    virtual void TearDown() {
+        delete _sut;
+    }
+
+    Font &  sut() {
+        return *_sut;
+    }
+};
+
+
+TEST_F(FontTest, ExistingGlyphIsFound) {
+    uint8_t buffer[sut().glyph_width()];
+    EXPECT_TRUE(sut().read_font_char_columns('a', buffer));
 }
 
 
-TEST(Font, PassingNullAsBufferFails) {
-    EXPECT_FALSE(read_font_char_columns('a', nullptr));
+TEST_F(FontTest,  PassingNullAsBufferFails) {
+    EXPECT_FALSE(sut().read_font_char_columns('a', nullptr));
 }
 
-TEST(Font, NotExistingGlyphIsNotFound) {
-    uint8_t buffer[GLYPH_WIDTH];
-    EXPECT_FALSE(read_font_char_columns(0xff, buffer)) << "The glyph for 0xff should not be defined";
+TEST_F(FontTest,  NotExistingGlyphIsNotFound) {
+    uint8_t buffer[sut().glyph_width()];
+    EXPECT_FALSE(sut().read_font_char_columns(0xff, buffer)) << "The glyph for 0xff should not be defined";
 }
 
-TEST(Font, GlyphSlashIsReturnedCorrectly) {
-    uint8_t retrieved_glyph[GLYPH_WIDTH];
+TEST_F(FontTest,  GlyphSlashIsReturnedCorrectly) {
+    uint8_t retrieved_glyph[sut().glyph_width()];
     bzero(retrieved_glyph, sizeof(retrieved_glyph));
 
-    EXPECT_THAT(read_font_char_columns('/', retrieved_glyph), Eq(true)) << "/ should be found";
+    EXPECT_THAT(sut().read_font_char_columns('/', retrieved_glyph), Eq(true)) << "/ should be found";
 
     const uint8_t expected_glyph[]{1, 2, 4, 8, 16};
 
-    for (int i = 0; i < GLYPH_WIDTH; ++i) {
+    for (int i = 0; i < sut().glyph_width(); ++i) {
         EXPECT_EQ(expected_glyph[i], retrieved_glyph[i]) << "expected and retrieved differ at index " << i;
     }
 }
 
-TEST(Font, UnknownGlyphSlashIsReturnedAsOpaque) {
-    uint8_t retrieved_glyph[GLYPH_WIDTH];
+TEST_F(FontTest,  UnknownGlyphSlashIsReturnedAsOpaque) {
+    uint8_t retrieved_glyph[sut().glyph_width()];
     bzero(retrieved_glyph, sizeof(retrieved_glyph));
 
-    EXPECT_THAT(read_font_char_columns(0xff, retrieved_glyph), Eq(false)) << "0xff should NOT be found";
+    EXPECT_THAT(sut().read_font_char_columns(0xff, retrieved_glyph), Eq(false)) << "0xff should NOT be found";
 
     const uint8_t expected_glyph[]{0xff, 0xff, 0xff, 0xff, 0xff};
 
-    for (int i = 0; i < GLYPH_WIDTH; ++i) {
+    for (int i = 0; i < sut().glyph_width(); ++i) {
         EXPECT_EQ(expected_glyph[i], retrieved_glyph[i]) << "expected and retrieved differ at index " << i;
     }
 }
 
-TEST(Font, UppercaseGlyphsAreFound) {
-    uint8_t buffer[GLYPH_WIDTH];
-    EXPECT_TRUE(read_font_char_columns('A', buffer)) << "For not existing upper-case  glyphs: return matching lower-case glyph";
+TEST_F(FontTest,  UppercaseGlyphsAreFound) {
+    uint8_t buffer[sut().glyph_width()];
+    EXPECT_TRUE(sut().read_font_char_columns('A', buffer))
+                        << "For not existing upper-case  glyphs: return matching lower-case glyph";
 }

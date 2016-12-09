@@ -4,7 +4,7 @@ set(HEADERS
         )
 
 set(SOURCES
-        device.c
+        avr_device.cpp
         )
 
 set(OTHERS
@@ -20,7 +20,7 @@ else ()
 endif ()
 
 set_target_properties(${LIBDEVICE_LIBRARY} PROPERTIES PREFIX "")
-set_target_properties(${LIBDEVICE_LIBRARY} PROPERTIES LINKER_LANGUAGE C)
+set_target_properties(${LIBDEVICE_LIBRARY} PROPERTIES LINKER_LANGUAGE CXX)
 target_include_directories(${LIBDEVICE_LIBRARY}
         PUBLIC ${CMAKE_SOURCE_DIR}
         )
