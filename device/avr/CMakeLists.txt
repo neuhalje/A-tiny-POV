@@ -16,7 +16,7 @@ if (CMAKE_CROSSCOMPILING AND CMAKE_SYSTEM_PROCESSOR STREQUAL "avr")
     add_avr_library(${LIBDEVICE_LIBRARY} ${HEADERS} ${SOURCES} ${OTHERS})
     set(LIBDEVICE_LIBRARY ${LIBDEVICE_LIBRARY}-${AVR_MCU})
 else ()
-    message(FATAL_ERROR "Crosscompiling required for ${LIBDEVICE_LIBRARY}")
+    message(FATAL_ERROR "Crosscompiling required for ${LIBDEVICE_LIBRARY} on avr")
 endif ()
 
 set_target_properties(${LIBDEVICE_LIBRARY} PROPERTIES PREFIX "")
