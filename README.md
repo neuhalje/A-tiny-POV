@@ -61,6 +61,34 @@ If not needed, the documentation support can be disabled with the CMake
 option `BUILD_DOCUMENTATION`.
 
 
+### C++
+
+C++ has been chosen a) to see whether C++ is suitable for such a small device, and 
+b) because it makes testing much easier because it has more accessible _seams_.
+
+#### C++ vs. C size comparison
+
+Comparing a C and a C++ version shows that  C++ has a 2.3 times larger image.
+
+Moving `delay_*` from the  header file into the .cpp  file (45037ff) decreases
+file size from 4362 to 2752 bytes.
+
+| Version                          | rel. size | text | data | bss |  dec |  hex |     filename     |
+|----------------------------------|:---------:|:----:|:----:|:---:|:----:|:----:|:----------------:|
+| Plain C (4f6b3d6)                |    100%   | 1882 |    6 |   0 | 1888 |  760 | pov-attiny85.elf |
+| C++ (6cabc7f)                    |    231%   | 4350 |    6 |   0 | 4362 | 110a | pov-attiny85.elf |
+| C++ w. delay_* in .cpp (45037ff) |    145%   | 2740 |    6 |   6 | 2752 |  ac0 | pov-attiny85.elf |
+
+Thanks
+--------
+
+Thanks to the following projects
+
+* Project template (CMake, etc): [atMETEO](https://github.com/fetzerch/atMETEO) by @fetzerch 
+* CMake/AVR integration: [cmake-avr](https://github.com/mkleemann/cmake-avr) by @mkleemann
+* Testing: [Google Test](https://github.com/google/googletest) by @google
+* Testing2: [cmake DownloadProject](https://github.com/Crascit/DownloadProject) by @Crascit
+
 License
 -------
 This program is free software; you can redistribute it and/or modify
