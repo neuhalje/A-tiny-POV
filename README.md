@@ -60,6 +60,26 @@ The Doxygen based API documentation can be build with `make dox`.
 If not needed, the documentation support can be disabled with the CMake
 option `BUILD_DOCUMENTATION`.
 
+### Hardware
+
+* [ATtiny85](http://www.atmel.com/devices/ATTINY85.aspx) as MCU
+* shift register for driving 8 LEDs (e.g. [BU4094BC](http://rohmfs.rohm.com/en/products/databook/datasheet/ic/logic_switch/standard_logic/bu4094bc-e.pdf) )
+
+Later:
+* tilt sensor to detect waving direction (e.g. [SW-520D](http://www.beelee-switch.com/prodcuts/Multiway-Function-Switch/SW_520D_series_R/05162H012.html))
+* Bluetooth module as serial interface (needs an MCU with more pins, e.g. [ATtiny84](https://en.wikipedia.org/wiki/Atmel_AVR_ATtiny_comparison_chart)
+
+| MCU pin |   Target             |  pin@target  |                       |
+|:-------:|:--------------------:|:------------:|:----------------------|
+|   1     |   (RESET)            | N/A          | _not implemented yet_ |
+|   2     |   not connected      | N/A          | _not implemented yet_ |
+|   3     |   Tilt sensor        |              | PCINT4 - signals waving direction change |
+|   4     |   GND                | N/A         |                       |
+|   5     |   BU4094BC           | Strobe (1)   | Serial to parallel conversion |
+|   6     |   BU4094BC           | Serial in (2)|         ''            |
+|   7     |   BU4094BC           | Clock (3)    |         ''            |
+|   8     |   VCC                | N/A          |                       |
+
 
 ### C++
 
