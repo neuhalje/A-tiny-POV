@@ -12,7 +12,18 @@
 
 Font gFont;
 Device gDevice;
-Display gDisplay(gDevice, gFont);
+
+
+#define PIN_BU4094BC_STROBE     4
+#define PIN_BU4094BC_SERIAL_IN  5
+#define PIN_BU4094BC_CLK        6
+
+BU4094BC gOutput(gDevice,
+                 PIN_BU4094BC_STROBE,
+                 PIN_BU4094BC_CLK,
+                 PIN_BU4094BC_SERIAL_IN);
+
+Display gDisplay(gDevice, gFont, gOutput);
 
 /**
  * \brief How much time to wait between two columns.
@@ -33,7 +44,6 @@ Display gDisplay(gDevice, gFont);
 static const uint8_t COLUMN_AFTER_GLYPH = 0;
 
 
-
 /*
 * Wait until the stick changes waving direction
 */
@@ -44,14 +54,14 @@ void wait_for_reverse_waving_direction() {
 void write_string(const char *message, uint8_t message_len) {
     for (uint8_t i = 0; i < message_len; i++) {
         gDisplay.output_char(message[i], DELAY_AFTER_GLYPH_COLUMN_US);
-        gDevice.show_column(COLUMN_AFTER_GLYPH);
+        gOutput.output(COLUMN_AFTER_GLYPH);
         gDevice.delay_us(DELAY_AFTER_GLYPH_US);
     }
 }
 
 void write_string_reverse(const char *message, uint8_t message_len) {
     for (uint8_t i = message_len - 1; i > 0; i--) {
-        gDevice.show_column(COLUMN_AFTER_GLYPH);
+        gOutput.output(COLUMN_AFTER_GLYPH);
         gDevice.delay_us(DELAY_AFTER_GLYPH_US);
         gDisplay.output_char_rev(message[i], DELAY_AFTER_GLYPH_COLUMN_US);
     }

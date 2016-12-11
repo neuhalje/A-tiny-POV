@@ -31,6 +31,7 @@
 #include <stdint.h>
 #include "device_specific.h"
 
+
 class Device {
 
 public:
@@ -40,16 +41,6 @@ public:
      * \addtogroup device
      * \{
      */
-
-    /*!
-     * \brief Output \p column on the LEDs.
-     * \param column Bit encoded state of the LEDs (0: off, 1: on).
-     *               LEDs are counted from the bottom (LSB) to
-     *               the top (MSB) of the glyph.
-     * \return void
-     */
-    void show_column(uint8_t column);
-
 
     /*!
     * \brief Perform a busy wait  of \c ms milliseconds.

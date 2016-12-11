@@ -14,5 +14,7 @@
 #define pgm_read_byte(ptr)  (*(ptr))
 #define memcpy_P(dst, src, len) memcpy(dst,src,len)
 
+extern uint8_t DDRB;
+extern uint8_t PORTB;
 
 #endif //ATPOV_DEVICE_AVR_H

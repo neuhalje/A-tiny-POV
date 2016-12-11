@@ -4,10 +4,6 @@
 
 #include "device.h"
 
-void Device::show_column(uint8_t column) {
-    PORTB = column;
-}
-
 void Device::delay_ms(const uint16_t ms) {
 
     const uint32_t __ticks_dc_per_ms = ((F_CPU) / 1e3);

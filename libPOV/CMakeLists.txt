@@ -3,12 +3,12 @@ set(HEADERS
         config.h
         font.h
         display.h
-        )
+        BU4094BC.cpp BU4094BC.h)
 
 set(SOURCES
         font.cpp
         display.cpp
-        )
+        BU4094BC.cpp BU4094BC.h)
 
 set(OTHERS
         libPOV.dox

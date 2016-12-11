@@ -1,10 +1,11 @@
 #include "device.h"
 #include "font.h"
+#include "BU4094BC.h"
 
 class Display {
 
 public:
-    Display(Device &device, Font& font) : _device(device), _font(font) {};
+    Display(Device &device, Font &font, BU4094BC& output) : _device(device), _font(font), _output(output) {};
 
     /*!
     * \brief Print character \ref c to output 'from left to right'
@@ -19,4 +20,5 @@ public:
 private:
     Device &_device;
     Font &_font;
+    BU4094BC &_output;
 };
