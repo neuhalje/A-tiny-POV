@@ -15,6 +15,12 @@ void Device::delay_ms(const uint16_t ms) {
     extern void __builtin_avr_delay_cycles(unsigned long);
 
     for (uint16_t bit = 1; bit < 16; bit++) {
+        // __builtin_avr_delay_cycles can only be called with
+        // parameters that are known at compile time
+        // E.g. __builtin_avr_delay_cycles(__ticks_dc_per_ms * ms) does not work.
+        //
+        // This implementation replaces '__ticks_dc_per_ms * ms' with
+        // bit shifts.
         if (ms & (1 << bit)) __builtin_avr_delay_cycles(__ticks_dc_per_ms << bit);
     }
 }
@@ -25,6 +31,12 @@ void Device::delay_us(const uint16_t us) {
     extern void __builtin_avr_delay_cycles(unsigned long);
 
     for (uint16_t bit = 1; bit < 16; bit++) {
+        // __builtin_avr_delay_cycles can only be called with
+        // parameters that are known at compile time
+        // E.g. __builtin_avr_delay_cycles(__ticks_dc_per_ms * ms) does not work.
+        //
+        // This implementation replaces '__ticks_dc_per_ms * ms' with
+        // bit shifts.
         if (us & (1 << bit)) __builtin_avr_delay_cycles(__ticks_dc_per_us << bit);
     }
 }
