@@ -90,14 +90,14 @@ b) because it makes testing much easier because it has more accessible _seams_.
 
 Comparing a C and a C++ version shows that  C++ has a 2.3 times larger image.
 
-Moving `delay_*` from the  header file into the .cpp  file (45037ff) decreases
+Moving `delay_*` from the  header file into the .cpp  file ( d6e2b2c ) decreases
 file size from 4362 to 2752 bytes.
 
-| Version                          | rel. size | text | data | bss |  dec |  hex |     filename     |
-|----------------------------------|:---------:|:----:|:----:|:---:|:----:|:----:|:----------------:|
-| Plain C (4f6b3d6)                |    100%   | 1882 |    6 |   0 | 1888 |  760 | pov-attiny85.elf |
-| C++ (6cabc7f)                    |    231%   | 4350 |    6 |   0 | 4362 | 110a | pov-attiny85.elf |
-| C++ w. delay_* in .cpp (45037ff) |    145%   | 2740 |    6 |   6 | 2752 |  ac0 | pov-attiny85.elf |
+| Version                            | rel. size | text | data | bss |  dec |  hex |     filename     |
+|------------------------------------|:---------:|:----:|:----:|:---:|:----:|:----:|:----------------:|
+| Plain C ( 61fbe56 )                |    100%   | 1882 |    6 |   0 | 1888 |  760 | pov-attiny85.elf |
+| C++ ( 648bfb5 )                    |    231%   | 4350 |    6 |   0 | 4362 | 110a | pov-attiny85.elf |
+| C++ w. delay_* in .cpp ( d6e2b2c ) |    145%   | 2740 |    6 |   6 | 2752 |  ac0 | pov-attiny85.elf |
 
 Thanks
 --------
