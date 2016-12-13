@@ -7,6 +7,18 @@
 
 /*!
  * Drives a BU4094BC shift register.
+ *
+ * From the ROHM datasheet:
+ *
+ *   The BU4094BC, BU4094BCF, and BU4094BCFV are shift / store registers, each consisting of an 8-bit register and
+ *   an 8-bit latch.
+ *   As the data in the shift register can be latched by an asynchronous strobe input, it is possible to hold the
+ *   output in the data transfer mode.
+ *   The tri-state parallel output can be connected directly with an 8-bit bus line.
+ *   These registers are suitable for in-line / parallel data conversion, data receivers and other similar
+ *   applications.
+ *
+ * This implementation assumes that OE is enabled (pull-up).
  */
 class BU4094BC {
 public:
@@ -62,6 +74,39 @@ protected:
 
     inline void low(uint8_t mask) {
         PORTB &= ~mask;
+    }
+
+    /*!
+     * \brief Set clock to HIGH.
+     *
+     * Make sure that the minimum timings  of the BU4094BC are respected
+     */
+    inline void tick() {
+        high(_pin_mask_BU4094BC_clk);
+
+        // TODO: better check timings
+        _device.delay_us(10);
+    }
+
+
+    /*!
+      * \brief Set clock to LOW.
+      *
+      * Make sure that the minimum timings  of the BU4094BC are respected
+      */
+    inline void tock() {
+        low(_pin_mask_BU4094BC_clk);
+
+        // TODO: better check timings
+        _device.delay_us(10);
+    }
+
+    inline void write_Sout(bool value) {
+        if (value) {
+            high(_pin_mask_BU4094BC_serial_in);
+        } else {
+            low(_pin_mask_BU4094BC_serial_in);
+        }
     }
 };
 

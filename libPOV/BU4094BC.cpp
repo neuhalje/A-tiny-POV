@@ -2,33 +2,37 @@
 
 void BU4094BC::output(uint8_t byte) {
 
+
+    // Strobe:
+    //    - High: Keep old values
+    //    - Low: Copy shift register to latch (output)
+    //
+    //  OE (Output Enabled): Assumed to be high via pull-up
+    //
+    //  Clock:
+    //    - Data is read from Sin at rising edge
+
+
     uint8_t mask = 1;
     for (uint8_t i = 0; i < 8; i++) {
+        tock();  // force known clock state
 
-        low(_pin_mask_BU4094BC_clk);
-        _device.delay_us(1);
+        write_Sout(byte & mask);
 
-        if (byte & mask) {
-            high(_pin_mask_BU4094BC_serial_in);
-        } else {
-            low(_pin_mask_BU4094BC_serial_in);
-        }
-
-        high(_pin_mask_BU4094BC_clk);
-        _device.delay_us(1);
+        tick();
 
         mask <<= 1;
     }
 
+    tock();
 
     // now latch
-    low(_pin_mask_BU4094BC_clk);
+    low(_pin_mask_BU4094BC_strobe);
+    tick();
+    tock();
     high(_pin_mask_BU4094BC_strobe);
-    _device.delay_us(1);
 
-    high(_pin_mask_BU4094BC_clk);
-    _device.delay_us(1);
-    low(_pin_mask_BU4094BC_clk);
+
 }
 
 BU4094BC::BU4094BC(Device &_device, uint8_t _pin_BU4094BC_strobe, uint8_t _pin_BU4094BC_clk,
@@ -38,4 +42,6 @@ BU4094BC::BU4094BC(Device &_device, uint8_t _pin_BU4094BC_strobe, uint8_t _pin_B
           _pin_mask_BU4094BC_serial_in(1 << _pin_BU4094BC_serial_in) {
 
     DDRB = (DDRB | _pin_mask_BU4094BC_clk | _pin_mask_BU4094BC_serial_in | _pin_mask_BU4094BC_strobe);
+    high(_pin_mask_BU4094BC_strobe);
+    low(_pin_mask_BU4094BC_clk);
 }
