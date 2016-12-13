@@ -21,12 +21,10 @@
  * \file
  * \ingroup libPOV_tests
  *
- * \brief Test functionality of \ref font.c
+ * \brief Test functionality of \ref libPOV::Font
  */
 
-extern "C" {
 #include "font.h"
-}
 
 #include "gtest/gtest.h"
 #include "gmock/gmock.h"

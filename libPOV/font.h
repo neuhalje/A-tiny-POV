@@ -4,6 +4,11 @@
 
 #pragma once
 
+/*!
+ * \brief Implementation of the font used.
+ *
+ * Font data is stored in program space to conserve RAM.
+ */
 class Font {
 
 public:
@@ -15,17 +20,17 @@ public:
     Font& operator= (const Font&) = delete;
 
     /*!
-     * \brief glyph width in pixels
+     * \brief glyph width (and height) in pixels.
      *
-     * @return
+     * @return width
      */
     uint8_t glyph_width() const;
 
     /*!
-     \brief read a \ref  glyph into \ref columns
+     \brief read a \ref glyph into \ref columns .
 
-     \param glyph ascii code of the glyph to read
-     \param out: columns points to an array with at least 8 free bytes.
+     \param glyph   - ascii code of the glyph to read.
+     \param columns - columns points to an array with at least 8 free bytes.
 
     @return
        true: glyph found

@@ -3,8 +3,14 @@ A tiny POV - ATtiny85 based Persistence of Vision
 
 To quote [Wikipedia](https://en.wikipedia.org/wiki/Persistence_of_vision):
 
-> Persistence of vision refers to the optical illusion whereby multiple discrete images blend into a single image in the human mind and believed to be the explanation for motion perception in cinema and animated films. Like other illusions of visual perception, it is produced by certain characteristics of the visual system.
+> Persistence of vision refers to the optical illusion whereby multiple
+>  discrete images blend into a single image in the human mind and
+>  believed to be the explanation for motion perception in cinema and
+>  animated films. Like other illusions of visual perception, it is
+>  produced by certain characteristics of the visual system.
 
+_A tiny POV_ is a PoC implementation of the persistence of vision effect using
+an ATtiny85 and a shift register.
 
 Building
 --------
@@ -31,10 +37,10 @@ Please see the cmake-avr documentation for more configuration options.
 
 ### Source layout
 
-Device dependent (e.g. `*avr*`) code is separated from program logic via libraries. 
-This will allow builds for the build machine (for unit tests) to execute without 
-mocking AVR specific code. On the donwside this makes the code less AVR idiomatic
-because wrapper funciton are needed. 
+Device dependent (e.g. `*avr*`) code is separated from program logic via
+libraries. This will allow builds for the build machine (for unit tests) to
+execute without mocking AVR specific code. On the downside this makes the
+code less AVR idiomatic because wrapper functionality is needed. 
 
 ```text
 <root>/
@@ -69,16 +75,16 @@ Later:
 * tilt sensor to detect waving direction (e.g. [SW-520D](http://www.beelee-switch.com/prodcuts/Multiway-Function-Switch/SW_520D_series_R/05162H012.html))
 * Bluetooth module as serial interface (needs an MCU with more pins, e.g. [ATtiny84](https://en.wikipedia.org/wiki/Atmel_AVR_ATtiny_comparison_chart)
 
-| MCU pin |   Target             |  pin@target  |                       |
-|:-------:|:--------------------:|:------------:|:----------------------|
-|   1     |   (RESET)            | N/A          | _not implemented yet_ |
-|   2     |   not connected      | N/A          | _not implemented yet_ |
-|   3     |   Tilt sensor        |              | PCINT4 - signals waving direction change |
-|   4     |   GND                | N/A         |                       |
-|   5     |   BU4094BC           | Strobe (1)   | Serial to parallel conversion |
-|   6     |   BU4094BC           | Serial in (2)|         ''            |
-|   7     |   BU4094BC           | Clock (3)    |         ''            |
-|   8     |   VCC                | N/A          |                       |
+| MCU pin |   Target             | pin on target |                       |
+|:-------:|:--------------------:|:-------------:|:----------------------|
+|   1     |   (RESET)            | N/A           | _not implemented yet_ |
+|   2     |   not connected      | N/A           | _not implemented yet_ |
+|   3     |   Tilt sensor        |               | PCINT4 - signals waving direction change |
+|   4     |   GND                | N/A           |                       |
+|   5     |   BU4094BC           | Strobe (1)    | Serial to parallel conversion |
+|   6     |   BU4094BC           | Serial in (2) |         ''            |
+|   7     |   BU4094BC           | Clock (3)     |         ''            |
+|   8     |   VCC                | N/A           |                       |
 
 
 ### C++
@@ -104,10 +110,10 @@ Thanks
 
 Thanks to the following projects
 
-* Project template (CMake, etc): [atMETEO](https://github.com/fetzerch/atMETEO) by @fetzerch 
-* CMake/AVR integration: [cmake-avr](https://github.com/mkleemann/cmake-avr) by @mkleemann
-* Testing: [Google Test](https://github.com/google/googletest) by @google
-* Testing2: [cmake DownloadProject](https://github.com/Crascit/DownloadProject) by @Crascit
+* Project template (CMake, etc): [atMETEO](https://github.com/fetzerch/atMETEO) by fetzerch 
+* CMake/AVR integration: [cmake-avr](https://github.com/mkleemann/cmake-avr) by mkleemann
+* Testing: [Google Test](https://github.com/google/googletest) by google
+* Testing2: [cmake DownloadProject](https://github.com/Crascit/DownloadProject) by Crascit
 
 License
 -------

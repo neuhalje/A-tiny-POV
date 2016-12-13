@@ -37,9 +37,9 @@ void BU4094BC::output(uint8_t byte) {
 
 BU4094BC::BU4094BC(Device &_device, uint8_t _pin_BU4094BC_strobe, uint8_t _pin_BU4094BC_clk,
                    uint8_t _pin_BU4094BC_serial_in)
-        : _device(_device), _pin_mask_BU4094BC_strobe(1 << _pin_BU4094BC_strobe),
-          _pin_mask_BU4094BC_clk(1 << _pin_BU4094BC_clk),
-          _pin_mask_BU4094BC_serial_in(1 << _pin_BU4094BC_serial_in) {
+        : _device(_device), _pin_mask_BU4094BC_strobe((uint8_t) (1 << _pin_BU4094BC_strobe)),
+          _pin_mask_BU4094BC_clk((uint8_t) (1 << _pin_BU4094BC_clk)),
+          _pin_mask_BU4094BC_serial_in((uint8_t) (1 << _pin_BU4094BC_serial_in)) {
 
     DDRB = (DDRB | _pin_mask_BU4094BC_clk | _pin_mask_BU4094BC_serial_in | _pin_mask_BU4094BC_strobe);
     high(_pin_mask_BU4094BC_strobe);
