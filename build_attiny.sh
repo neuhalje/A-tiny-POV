@@ -3,8 +3,8 @@
 ##### Configuration
 #
 
-UPLOAD_PORT=/dev/spidev0.0
-AVR_PROGRAMMER=linuxspi
+UPLOAD_PORT=/dev/tty.lpss-serial1
+AVR_PROGRAMMER=usbasp
 AVR_UPLOADTOOL_OPTIONS="-b 10000"
 
 AVR_L_FUSE=0xE2
