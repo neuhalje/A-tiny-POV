@@ -15,21 +15,21 @@ void BU4094BC::output(uint8_t byte) {
 
     uint8_t mask = 1;
     for (uint8_t i = 0; i < 8; i++) {
-        tock();  // force known clock state
+        clockLow();  // force known clock state
 
         write_Sout(byte & mask);
 
-        tick();
+        clockHigh();
 
         mask <<= 1;
     }
 
-    tock();
+    clockLow();
 
     // now latch
     low(_pin_mask_BU4094BC_strobe);
-    tick();
-    tock();
+    clockHigh();
+    clockLow();
     high(_pin_mask_BU4094BC_strobe);
 
 

@@ -103,7 +103,7 @@ protected:
      *
      * Ensures that the minimum timings of the BU4094BC are respected
      */
-    inline void tick() {
+    inline void clockHigh() {
         high(_pin_mask_BU4094BC_clk);
 
         // TODO: better check timings
@@ -116,7 +116,7 @@ protected:
       *
       * Ensures that the minimum timings  of the BU4094BC are respected
       */
-    inline void tock() {
+    inline void clockLow() {
         low(_pin_mask_BU4094BC_clk);
 
         // TODO: better check timings
