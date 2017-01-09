@@ -40,4 +40,4 @@ cmake -DCMAKE_TOOLCHAIN_FILE="${CMAKE_AVR_FILE}" \
     -DAVR_L_FUSE="${AVR_L_FUSE}" -DAVR_H_FUSE="${AVR_H_FUSE}" \
     "$SRC_DIR"
 
-make && sudo make set_fuses upload_pov
+make && make set_fuses upload_pov
