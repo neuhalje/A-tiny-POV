@@ -78,7 +78,7 @@ TEST_F(FontTest,  GlyphSlashIsReturnedCorrectly) {
     }
 }
 
-TEST_F(FontTest,  UnknownGlyphSlashIsReturnedAsOpaque) {
+TEST_F(FontTest, UnknownGlyphIsReturnedAsOpaque) {
     uint8_t retrieved_glyph[sut().glyph_width()];
     bzero(retrieved_glyph, sizeof(retrieved_glyph));
 
