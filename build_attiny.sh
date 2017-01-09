@@ -7,8 +7,13 @@ UPLOAD_PORT=/dev/tty.lpss-serial1
 AVR_PROGRAMMER=usbasp
 AVR_UPLOADTOOL_OPTIONS="-b 10000"
 
+### Default values
+AVR_L_FUSE_DEFAULT=0x62
+AVR_H_FUSE_DEFAULT=0xDF
+
+# Enable 8 Mhz
 AVR_L_FUSE=0xE2
-AVR_H_FUSE=0xDF
+AVR_H_FUSE=${AVR_H_FUSE_DEFAULT}
 
 #
 ##### End of configuration
