@@ -95,7 +95,7 @@ protected:
     * @param mask E.g. 0b00000100
     */
     inline void low(uint8_t mask) {
-        PORTB &= ~mask;
+        PORTB &= (uint8_t) ~mask;
     }
 
     /*!
