@@ -18,7 +18,9 @@ Device gDevice;
 #define PIN_BU4094BC_SERIAL_IN  5
 #define PIN_BU4094BC_CLK        6
 
+
 BU4094BC gOutput(gDevice,
+                 PORTB,
                  PIN_BU4094BC_STROBE,
                  PIN_BU4094BC_CLK,
                  PIN_BU4094BC_SERIAL_IN);

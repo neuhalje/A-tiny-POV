@@ -28,11 +28,12 @@ public:
      * Creates the driver and initializes the shift register.
      *
      * @param _device
-     * @param pin_BU4094BC_strobe       0-based pin (on PORTB) that connects to STROBE on the BU4094BC
-     * @param pin_BU4094BC_clk          0-based pin (on PORTB) that connects to CLK on the BU4094BC
-     * @param pin_BU4094BC_serial_in    0-based pin (on PORTB) that connects to SERIAL IN on the BU4094BC
+     * @param port                      port to use, e.g. PORTB. The pins must already be set to 'out'
+     * @param pin_BU4094BC_strobe       0-based pin (on \ref port) that connects to STROBE on the BU4094BC
+     * @param pin_BU4094BC_clk          0-based pin (on \ref port) that connects to CLK on the BU4094BC
+     * @param pin_BU4094BC_serial_in    0-based pin (on \ref port) that connects to SERIAL IN on the BU4094BC
      */
-    BU4094BC(Device &_device, uint8_t pin_BU4094BC_strobe, uint8_t pin_BU4094BC_clk,
+    BU4094BC(Device &_device, volatile uint8_t &port, uint8_t pin_BU4094BC_strobe, uint8_t pin_BU4094BC_clk,
              uint8_t pin_BU4094BC_serial_in);
 
     /*!
@@ -48,6 +49,7 @@ public:
 
 protected:
     Device &_device;
+    volatile uint8_t &_port;
 
     /*!
      * The pin (on PORTB) that connects to STROBE on the BU4094BC
@@ -82,7 +84,7 @@ protected:
     * @param mask E.g. 0b00000100
     */
     inline void high(uint8_t mask) {
-        PORTB |= mask;
+        _port |= mask;
     }
 
     /*!
@@ -95,7 +97,7 @@ protected:
     * @param mask E.g. 0b00000100
     */
     inline void low(uint8_t mask) {
-        PORTB &= (uint8_t) ~mask;
+        _port &= (uint8_t) ~mask;
     }
 
     /*!
