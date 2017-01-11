@@ -124,6 +124,25 @@ protected:
     }
 
     /*!
+   * \brief Set strobe to HIGH.
+   *
+   */
+    inline void strobeHigh() {
+        high(_pin_mask_BU4094BC_strobe);
+    }
+
+
+    /*!
+      * \brief Set clock to LOW.
+      *
+      * Ensures that the minimum timings  of the BU4094BC are respected
+      */
+    inline void strobeLow() {
+        low(_pin_mask_BU4094BC_strobe);
+
+    }
+
+    /*!
      * \brief Write \ref value into the shift register.
      *
      * @param value

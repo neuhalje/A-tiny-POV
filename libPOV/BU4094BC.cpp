@@ -2,7 +2,6 @@
 
 void BU4094BC::output(uint8_t byte) {
 
-
     // Strobe:
     //    - High: Keep old values
     //    - Low: Copy shift register to latch (output)
@@ -27,12 +26,10 @@ void BU4094BC::output(uint8_t byte) {
     clockLow();
 
     // now latch
-    low(_pin_mask_BU4094BC_strobe);
+    strobeLow();
     clockHigh();
     clockLow();
-    high(_pin_mask_BU4094BC_strobe);
-
-
+    strobeHigh();
 }
 
 BU4094BC::BU4094BC(Device &_device, uint8_t _pin_BU4094BC_strobe, uint8_t _pin_BU4094BC_clk,
