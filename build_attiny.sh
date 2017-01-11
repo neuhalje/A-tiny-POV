@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+#
+# Does a complete clean out-of-source build and flashes it
+#
+
 ##### Configuration
 #
 
