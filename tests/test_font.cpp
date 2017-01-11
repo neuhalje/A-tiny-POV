@@ -52,17 +52,17 @@ protected:
 
 TEST_F(FontTest, ExistingGlyphIsFound) {
     uint8_t buffer[sut().glyph_width()];
-    EXPECT_TRUE(sut().read_font_char_columns('a', buffer));
+    ASSERT_TRUE(sut().read_font_char_columns('a', buffer));
 }
 
 
 TEST_F(FontTest,  PassingNullAsBufferFails) {
-    EXPECT_FALSE(sut().read_font_char_columns('a', nullptr));
+    ASSERT_FALSE(sut().read_font_char_columns('a', nullptr));
 }
 
 TEST_F(FontTest,  NotExistingGlyphIsNotFound) {
     uint8_t buffer[sut().glyph_width()];
-    EXPECT_FALSE(sut().read_font_char_columns(0xff, buffer)) << "The glyph for 0xff should not be defined";
+    ASSERT_FALSE(sut().read_font_char_columns(0xff, buffer)) << "The glyph for 0xff should not be defined";
 }
 
 TEST_F(FontTest,  GlyphSlashIsReturnedCorrectly) {
@@ -74,7 +74,7 @@ TEST_F(FontTest,  GlyphSlashIsReturnedCorrectly) {
     const uint8_t expected_glyph[]{1, 2, 4, 8, 16};
 
     for (int i = 0; i < sut().glyph_width(); ++i) {
-        EXPECT_EQ(expected_glyph[i], retrieved_glyph[i]) << "expected and retrieved differ at index " << i;
+        ASSERT_EQ(expected_glyph[i], retrieved_glyph[i]) << "expected and retrieved differ at index " << i;
     }
 }
 
@@ -87,12 +87,12 @@ TEST_F(FontTest, UnknownGlyphIsReturnedAsOpaque) {
     const uint8_t expected_glyph[]{0xff, 0xff, 0xff, 0xff, 0xff};
 
     for (int i = 0; i < sut().glyph_width(); ++i) {
-        EXPECT_EQ(expected_glyph[i], retrieved_glyph[i]) << "expected and retrieved differ at index " << i;
+        ASSERT_EQ(expected_glyph[i], retrieved_glyph[i]) << "expected and retrieved differ at index " << i;
     }
 }
 
 TEST_F(FontTest,  UppercaseGlyphsAreFound) {
     uint8_t buffer[sut().glyph_width()];
-    EXPECT_TRUE(sut().read_font_char_columns('A', buffer))
+    ASSERT_TRUE(sut().read_font_char_columns('A', buffer))
                         << "For not existing upper-case  glyphs: return matching lower-case glyph";
 }
