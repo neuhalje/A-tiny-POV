@@ -51,8 +51,12 @@ protected:
     Device &_device;
     volatile uint8_t &_port;
 
+public: // for testing!
+
     /*!
-     * The pin (on PORTB) that connects to STROBE on the BU4094BC
+     * The pin mask (on \ref port) that connects to STROBE on the BU4094BC
+     *
+     * e.g.
      *
      * 0 : PIN1
      * 1 : PIN2
@@ -64,33 +68,32 @@ protected:
     uint8_t _pin_mask_BU4094BC_strobe;
 
     /*!
-    * The pin (on PORTB) that connects to CLK on the BU4094BC
+    * The pin (on \ref port) that connects to CLK on the BU4094BC
     */
     uint8_t _pin_mask_BU4094BC_clk;
 
     /*!
-    * The pin (on PORTB) that connects to SERIAL IN on the BU4094BC
+    * The pin (on \ref port) that connects to SERIAL IN on the BU4094BC
     */
     uint8_t _pin_mask_BU4094BC_serial_in;
 
-
     /*!
-    * \brief Set all PORTB bits set in \ref mask to HIGH.
+    * \brief Set all port bits set in \ref mask to HIGH.
     *
-    * The following code will set  bit#2 in PORTB to HIGH and keeps the other bits untouched.
+    * The following code will set  bit#2 in port to HIGH and keeps the other bits untouched.
     *
     * \code  low(0b00000100)  \endcode
     *
-    * @param mask E.g. 0b00000100
+    * @param mask E.g. 0b10100100
     */
     inline void high(uint8_t mask) {
         _port |= mask;
     }
 
     /*!
-    * \brief Set all PORTB bits set in \ref mask to LOW.
+    * \brief Set all port bits set in \ref mask to LOW.
     *
-    * The following code will set  bit#2 in PORTB to LOW and keeps the other bits untouched.
+    * The following code will set  bit#2 in port to LOW and keeps the other bits untouched.
      *
     * \code  low(0b00000100)  \endcode
     *
@@ -145,7 +148,7 @@ protected:
     }
 
     /*!
-     * \brief Write \ref value into the shift register.
+     * \brief Write bit \ref value into the shift register.
      *
      * @param value
      */

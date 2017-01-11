@@ -53,7 +53,7 @@ include_directories(${PROJECT_SOURCE_DIR}/libPOV)
 
 function(add_test_gmock _NAME)
     add_executable(${_NAME} ${ARGN} ${HEADERS} ${OTHERS})
-    target_link_libraries(${_NAME} PRIVATE libPOV gtest gmock_main)
+    target_link_libraries(${_NAME} PRIVATE libPOV libdevice gtest gmock_main)
     add_test(
             NAME ${_NAME}
             COMMAND ${_NAME} --gtest_output=xml:${_NAME}.xml)
@@ -61,3 +61,4 @@ endfunction()
 
 add_test_gmock(example_gtest test_example_gtest.cpp)
 add_test_gmock(test_font test_font.cpp)
+add_test_gmock(test_BU4094BC test_BU4094BC.cpp)
